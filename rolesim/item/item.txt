@@ -1,0 +1,9 @@
+0/Health Potion/0/500
+1/Great Health Potion/0/1000
+2/Stale Health Potion/0/100
+3/Mana Potion/1/50
+4/Great Mana Potion/1/100
+5/Stale Mana Potion/1/10
+6/Grenade/2/100
+7/Mini Grenade/2/50
+8/Big Grenade/2/300

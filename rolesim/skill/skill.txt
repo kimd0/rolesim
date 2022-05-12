@@ -1,0 +1,5 @@
+0/Double Slash/1.5/50/0
+1/Keen Piercing/2/70/0
+2/Shoulder Charge/1/30/0
+3/Fire Ball/3/100/1
+4/Ice Ball/3/100/2

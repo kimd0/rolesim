@@ -1,5 +1,17 @@
 #include "playdata.h"
 
+PlayData::PlayData()
+{
+	name_ = "";
+	level_ = 1;
+	health_ = 100;
+	mana_ = 50;
+	money_ = 1000;
+	skill_ = {};
+	item_ = {};
+	//NewData();
+}
+
 void PlayData::ReadFile(string file_name)
 {
 	ifstream read_file;
@@ -21,7 +33,7 @@ void PlayData::ReadFile(string file_name)
 		getline(read_file, read_line);
 		stringstream kstream(read_line);
 		string skill;
-		while (getline(kstream, skill, ','))
+		while (getline(kstream, skill, '/'))
 		{
 			skill_.push_back(stoi(skill));
 		}
@@ -30,7 +42,7 @@ void PlayData::ReadFile(string file_name)
 		getline(read_file, read_line);
 		stringstream istream(read_line);
 		string item;
-		while (getline(istream, item, ','))
+		while (getline(istream, item, '/'))
 		{
 			item_.push_back(stoi(item));
 		}
@@ -56,7 +68,7 @@ bool PlayData::SelectData()
 		data = p.path().filename().string();
 		data = data.substr(0, data.length() - 4);
 		data_list.push_back(data);
-		cout << data << endl; //결과: test.txt
+		cout << data << endl;
 	}
 	cout << "-----------------------------" << endl;
 	cout << "Input player name :";
@@ -78,7 +90,9 @@ bool PlayData::SelectData()
 void PlayData::NewData()
 {
 	//정보 입력 받아서 저장
-	//초기 아이템 지급
+	string name;
+	cout << "Please input your name : ";;
+	cin >> name;
 	SaveData();
 }
 
@@ -97,7 +111,7 @@ void PlayData::RemoveData()
 
 }
 
-void PlayData::ShowData()
+void PlayData::ShowData(ItemData &itemdata)
 {
 	cout << "-----------------------------" << endl;
 	cout << "[Character Status]" << endl;
@@ -105,11 +119,15 @@ void PlayData::ShowData()
 	cout << "[LV." << level_ << "] " << name_ << endl;
 	cout << "Health : " << health_ << endl;
 	cout << "Mana : " << mana_ << endl;
-	cout << "Money : " << mana_ << endl;
+	cout << "Money : " << money_ << endl;
 	cout << "-----------------------------" << endl;
 	cout << "[Skills]" << endl;
 	cout << "-----------------------------" << endl;
 	cout << "-----------------------------" << endl;
 	cout << "[Inventory]" << endl;
 	cout << "-----------------------------" << endl;
+	for (int i = 0; i < item_.size(); ++i)
+	{
+		cout << itemdata.GetName(item_[i]) << endl;
+	}
 }

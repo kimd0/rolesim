@@ -7,6 +7,7 @@
 #include <fstream>
 #include <algorithm>
 #include <filesystem>
+#include "itemdata.h"
 
 using namespace std;
 
@@ -24,9 +25,10 @@ private:
 	void WriteFile(string);
 	bool SelectData();
 public:
+	PlayData();
 	void NewData();
 	void LoadData();
 	void SaveData();
-	void ShowData();
+	void ShowData(ItemData&);
 	void RemoveData();
 };

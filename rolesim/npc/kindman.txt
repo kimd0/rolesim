@@ -1,0 +1,6 @@
+friend
+0/1/3/4
+Hello
+Hi
+script
+script

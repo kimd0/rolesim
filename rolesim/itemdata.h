@@ -13,9 +13,11 @@ using namespace std;
 class ItemData
 {
 private:
-	vector<string> item_;
+	vector<vector<int>> item_;
+	vector<string> itemname_;
 	void ReadFile(string);
 public:
+	ItemData();
 	void LoadData();
-	string GetData(int);
+	string GetName(int);
 };

@@ -14,7 +14,7 @@ class ItemData
 {
 private:
 	vector<vector<int>> item_;
-	vector<string> itemname_;
+	vector<string> item_name_;
 	void ReadFile(string);
 public:
 	ItemData();

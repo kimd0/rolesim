@@ -4,6 +4,7 @@
 #include <iostream>
 #include "playdata.h"
 #include "itemdata.h"
+#include "npcdata.h"
 
 using namespace std;
 
@@ -12,6 +13,7 @@ int main()
     int input;
     ItemData item_data;
     PlayData play_data;
+    NpcData npc_data;
     cout << "-----------------------------" << endl;
     cout << "Role playing game simulator" << endl;
     cout << "-----------------------------" << endl;

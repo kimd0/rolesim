@@ -23,7 +23,7 @@ void ItemData::ReadFile(string file_name)
 			new_item.push_back(stoi(item));
 			//name
 			getline(sstream, item, '/');
-			itemname_.push_back(item);
+			item_name_.push_back(item);
 			//type
 			getline(sstream, item, '/');
 			new_item.push_back(stoi(item));
@@ -45,7 +45,7 @@ void ItemData::LoadData()
 		if (i != item_[i][0])
 		{
 			cout << "[Error] Please check item data integrity." << endl;
-			cout << "Wrong item code : " << item_[i][0] << "| name : " << itemname_[i] << endl;
+			cout << "Wrong item code : " << item_[i][0] << "| name : " << item_name_[i] << endl;
 		}
 	}
 
@@ -62,6 +62,6 @@ void ItemData::LoadData()
 string ItemData::GetName(int code)
 {
 	string item_name;
-	item_name = itemname_[code];
+	item_name = item_name_[code];
 	return item_name;
 }

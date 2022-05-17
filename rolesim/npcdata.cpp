@@ -42,7 +42,7 @@ void NpcData::LoadData()
 	for (auto& p : filesystem::recursive_directory_iterator(p))
 		npc_number++;
 
-	for (int i =0; i < npc_number; i++)
+	for (int i =0; i < npc_number; ++i)
 		ReadFile(i);
 	
 	/*

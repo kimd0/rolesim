@@ -21,9 +21,13 @@ private:
 	int money_;
 	vector<int> skill_;
 	vector<int> item_;
+	vector<string> player_list_;
 	void ReadFile(string);
 	void WriteFile(string);
-	bool SelectData();
+	void GetPlayerList();
+	void SelectData();
+	bool CheckData(string);
+	bool CheckPlayer(string);
 public:
 	PlayData();
 	void NewData();
@@ -31,4 +35,6 @@ public:
 	void SaveData();
 	void ShowData(ItemData&);
 	void RemoveData();
+	void AddSkill(int);
+	void AddItem(int);
 };

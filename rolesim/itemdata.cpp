@@ -15,21 +15,20 @@ void ItemData::ReadFile(string file_name)
 		while(getline(read_file, read_line))
 		{
 			stringstream sstream(read_line);
-			string item;
 			vector<int> new_item;
 			//item.txt: code/name/type/value
 			//code
-			getline(sstream, item, '/');
-			new_item.push_back(stoi(item));
+			getline(sstream, read_line, '/');
+			new_item.push_back(stoi(read_line));
 			//name
-			getline(sstream, item, '/');
-			item_name_.push_back(item);
+			getline(sstream, read_line, '/');
+			item_name_.push_back(read_line);
 			//type
-			getline(sstream, item, '/');
-			new_item.push_back(stoi(item));
+			getline(sstream, read_line, '/');
+			new_item.push_back(stoi(read_line));
 			//value
-			getline(sstream, item, '/');
-			new_item.push_back(stoi(item));
+			getline(sstream, read_line, '/');
+			new_item.push_back(stoi(read_line));
 
 			item_.push_back(new_item);
 		}
@@ -40,7 +39,7 @@ void ItemData::LoadData()
 {
 	ReadFile("item\\item.txt");
 	//check integrity by comparing item code and array index
-	for (int i = 0; i < item_.size(); i++)
+	for (int i = 0; i < item_.size(); ++i)
 	{
 		if (i != item_[i][0])
 		{
@@ -54,7 +53,7 @@ void ItemData::LoadData()
 	cout << "Loaded item data" << endl;
 	for (int i = 0; i < item_.size(); i++)
 	{
-		cout << "[" << item_[i][0] << "] " << itemname_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
+		cout << "[" << item_[i][0] << "] " << item_name_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
 	}
 	*/
 }

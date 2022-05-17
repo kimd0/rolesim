@@ -36,11 +36,15 @@ void NpcData::ReadFile(int code)
 
 void NpcData::LoadData()
 {
-	int npc_number = 2; //TODO: number of files in npc folder
+	int npc_number = 0;
+	filesystem::path p("./npc");
+
+	for (auto& p : filesystem::recursive_directory_iterator(p))
+		npc_number++;
+
 	for (int i =0; i < npc_number; i++)
-	{
 		ReadFile(i);
-	}
+	
 	/*
 	//show loaded data
 	cout << "Loaded npc data :" << endl;

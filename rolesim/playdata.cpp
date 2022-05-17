@@ -92,7 +92,7 @@ void PlayData::SelectData()
 	cout << "-----------------------------" << endl;
 	cout << "Saved Data" << endl;
 	cout << "-----------------------------" << endl;
-	for (int i = 1; i < player_list_.size(); i++)
+	for (int i = 0; i < player_list_.size(); ++i)
 		cout << player_list_[i] << endl;
 	cout << "-----------------------------" << endl;
 

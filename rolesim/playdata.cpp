@@ -182,6 +182,7 @@ void PlayData::ShowData(ItemData &itemdata)
 	cout << "[Skills]" << endl;
 	cout << "-----------------------------" << endl;
 	//add after skilldata class implementation
+
 	cout << "-----------------------------" << endl;
 	cout << "[Inventory]" << endl;
 	cout << "-----------------------------" << endl;

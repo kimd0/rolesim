@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <filesystem>
 #include "itemdata.h"
+#include "skilldata.h"
 
 using namespace std;
 

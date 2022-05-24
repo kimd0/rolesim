@@ -169,7 +169,7 @@ void PlayData::RemoveData()
 
 }
 
-void PlayData::ShowData(ItemData &itemdata)
+void PlayData::ShowData(SkillData& skilldata, ItemData &itemdata)
 {
 	cout << "-----------------------------" << endl;
 	cout << "[Character Status]" << endl;
@@ -181,8 +181,8 @@ void PlayData::ShowData(ItemData &itemdata)
 	cout << "-----------------------------" << endl;
 	cout << "[Skills]" << endl;
 	cout << "-----------------------------" << endl;
-	//add after skilldata class implementation
-
+	for (int i = 0; i < skill_.size(); ++i)
+		cout << skilldata.GetName(skill_[i]) << endl;
 	cout << "-----------------------------" << endl;
 	cout << "[Inventory]" << endl;
 	cout << "-----------------------------" << endl;

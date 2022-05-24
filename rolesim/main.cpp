@@ -9,8 +9,10 @@ int main()
 {
     int input;
     ItemData item_data;
+    SkillData skill_data;
     PlayData play_data;
     NpcData npc_data;
+
     cout << "-----------------------------" << endl;
     cout << "Role playing game simulator" << endl;
     cout << "-----------------------------" << endl;
@@ -36,7 +38,7 @@ int main()
             fflush(stdin);
         }
     }
-    play_data.ShowData(item_data);
+    play_data.ShowData(skill_data, item_data);
 
     //actual game play (combat)
     while (true)

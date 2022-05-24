@@ -41,7 +41,9 @@ void ItemData::LoadData()
 	//check integrity by comparing item code and array index
 	for (int i = 0; i < item_.size(); ++i)
 	{
-		if (i != item_[i][0])
+		if (item_[i].size() != 3 || item_name_[i].empty())
+			cout << "[Error] Please check item data integrity. Error item code " << i << endl;
+		else if (i != item_[i][0])
 		{
 			cout << "[Error] Please check item data integrity." << endl;
 			cout << "Wrong item code : " << item_[i][0] << "| name : " << item_name_[i] << endl;

@@ -34,7 +34,7 @@ public:
 	void NewData();
 	void LoadData();
 	void SaveData();
-	void ShowData(ItemData&);
+	void ShowData(SkillData&, ItemData&);
 	void RemoveData();
 	void AddSkill(int);
 	void AddItem(int);

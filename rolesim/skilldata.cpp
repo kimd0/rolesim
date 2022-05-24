@@ -4,6 +4,7 @@ SkillData::SkillData()
 {
 	LoadData();
 }
+
 void SkillData::ReadFile(string file_name)
 {
 	ifstream read_file;
@@ -16,7 +17,7 @@ void SkillData::ReadFile(string file_name)
 			stringstream sstream(read_line);
 			string skill;
 			vector<int> new_skill;
-			//skill.txt: code/name/type/value/usedmp
+			//skill.txt: code/name/type/value/cost
 			//code
 			getline(sstream, skill, '/');
 			new_skill.push_back(stoi(skill));
@@ -29,7 +30,7 @@ void SkillData::ReadFile(string file_name)
 			//value
 			getline(sstream, skill, '/');
 			new_skill.push_back(stoi(skill));
-			//usedmp
+			//cost
 			getline(sstream, skill, '/');
 			new_skill.push_back(stoi(skill));
 
@@ -43,17 +44,28 @@ void SkillData::LoadData()
 	ReadFile("skill\\skill.txt");
 	for (int i = 0; i < skill_.size(); i++)
 	{
-		if (i != skill_[i][0])
+		if (skill_[i].size() != 4 || skill_name_[i].empty())
+			cout << "[Error] Please check skill data integrity. Error skill code " << i << endl;
+		else if (i != skill_[i][0])
 		{
 			cout << "[Error] Please check skill data integrity." << endl;
 			cout << "Wrong skill code : " << skill_[i][0] << "| name : " << skill_name_[i] << endl;
 		}
 	}
+
+	/*
+	//show loaded data
+	cout << "Loaded skill data" << endl;
+	for (int i = 0; i < skill_.size(); i++)
+	{
+		cout << "[" << skill_[i][0] << "] " << skill_name_[i] << " | type : " << skill_[i][1] << " | value : " << skill_[i][2] << skill_[i][1] << " | cost : " << skill_[i][3] << endl;
+	}
+	*/
 }
 
-	string SkillData::GetName(int code)
-	{
-		string skill_name;
-		skill_name = skill_name_[code];
-		return skill_name;
-	}
+string SkillData::GetName(int code)
+{
+	string skill_name;
+	skill_name = skill_name_[code];
+	return skill_name;
+}

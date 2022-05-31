@@ -24,15 +24,13 @@ bool StageManager::newStage()
 		cout << "3) Status\t\t4) Exit" << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "Input: ";
+		fflush(stdin);
 		cin >> input;
 		if (input == 1)
 		{
 			system("cls");
-			random_device rd;
-			mt19937 gen(rd());
-			uniform_int_distribution<> dist(0, 99);
 
-			if (dist(gen) < 0) //for test. should be "dist(gen) < 70"
+			if (computeProbability(0)) //for test. should be 70%
 			{
 				if (monsterStage())
 					break;
@@ -53,6 +51,7 @@ bool StageManager::newStage()
 			cout << "[Tip] Input -1 to Cancel." << endl;
 			cout << "---------------------------------------------" << endl;
 			cout << "Select item : ";
+			fflush(stdin);
 			cin >> input;
 			if (input != -1)
 				play_data_.useItem(input);
@@ -70,7 +69,6 @@ bool StageManager::newStage()
 		else
 		{
 			cout << "[Info] Please enter valid input." << endl;
-			fflush(stdin);
 		}
 	}
 	return true;
@@ -81,11 +79,34 @@ bool StageManager::monsterStage()
 	int input;
 
 	//monster encounter
-	system("cls");
-	cout << "1) Fight    2) Run" << endl;
-	cin >> input;
+	while (true)
+	{
+		system("cls");
+		cout << "---------------------------------------------" << endl;
+		cout << "A monster appeared from the darkness." << endl;
+		cout << "---------------------------------------------" << endl;
+		cout << "1) Fight    2) Run" << endl;
+		cout << "---------------------------------------------" << endl;
+		cout << "Input : ";
+		fflush(stdin);
+		cin >> input;
 
-	//player win -> return true, lose -> return false.
+		if (input == 1)
+		{
+			break;
+		}
+		else if (input == 2)
+		{
+			if (computeProbability(50) == 1)
+				break;
+		}
+		else
+		{
+			cout << "[Info] Please enter valid input." << endl;
+		}
+	}
+	//need to implement combat here
+	//player win / runaway (50%)) -> return true, lose -> return false.
 	return true;
 }
 
@@ -112,4 +133,16 @@ void StageManager::npcStage()
 		play_data_.gainSkill(npc_reward[1]);
 	}
 	cout << "---------------------------------------------" << endl;
+}
+
+bool computeProbability(int percent)
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dist(0, 100);
+
+	if (dist(gen) < percent)
+		return true;
+	else
+		return false;
 }

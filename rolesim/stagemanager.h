@@ -13,6 +13,7 @@ private:
 	PlayData play_data_;
 	bool monsterStage();
 	void npcStage();
+	bool computeProbability(int);
 public:
 	StageManager(PlayData&);
 	~StageManager();

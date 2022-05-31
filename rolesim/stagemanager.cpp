@@ -17,19 +17,20 @@ bool StageManager::newStage()
 
 	while (true)
 	{
-		system("cls");
 		cout << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "[Info] An endless dungeon unfolds before your eyes." << endl;
-		cout << "1) Go\t2) Stop\t3) Status" << endl;
+		cout << "1) Go    2) Stop    3) Status" << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "Input: ";
 		cin >> input;
 		if (input == 1)
 		{
-			//monster 70%, npc 30%
-			srand((unsigned int)time(NULL));
-			if (rand() % 100 < 0) //for test. should be "rand() % 100 < 70"
+			random_device rd;
+			mt19937 gen(rd());
+			uniform_int_distribution<> dist(0, 99);
+
+			if (dist(gen) < 0) //for test. should be "dist(gen) < 70"
 			{
 				if (monsterStage())
 					break;

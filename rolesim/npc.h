@@ -1,9 +1,8 @@
 #pragma once
 
-#include <iostream>
 #include <string>
 #include <vector>
-#include <ctime>
+#include <random>
 
 using namespace std;
 
@@ -16,9 +15,8 @@ private:
 	vector<int> skills_;
 public:
 	Npc(string, vector<string>, vector<int>, vector<int>);
-	string getName();
-	string getScript();
-	vector<int> getReward();
-	void getInfo();
+	string getName() const;
+	string getScript() const;
+	vector<int> getReward() const;
 };
 

@@ -1,10 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <cstdlib>
-#include <ctime>
+#include <random>
 #include "playdata.h"
 
 using namespace std;

@@ -5,13 +5,14 @@ SkillData::SkillData()
 	loadData();
 }
 
-void SkillData::readFile(string file_name)
+void SkillData::readFile(const string& file_name)
 {
 	ifstream read_file;
-	string read_line;
+
 	read_file.open(file_name);
 	if (read_file.is_open())
 	{
+		string read_line;
 		while (getline(read_file, read_line))
 		{
 			stringstream sstream(read_line);
@@ -43,7 +44,7 @@ void SkillData::loadData()
 {
 	readFile("skill\\skill.txt");
 	//check integrity by comparing skill code and array index, size check
-	for (int i = 0; i < skill_.size(); i++)
+	for (vector<int>::size_type i = 0; i < skill_.size(); i++)
 	{
 		if (skill_[i].size() != 4 || skill_name_[i].empty())
 			cout << "[Error] Please check skill data integrity. Error skill code " << i << endl;
@@ -55,16 +56,14 @@ void SkillData::loadData()
 	}
 }
 
-void SkillData::showData()
+void SkillData::showData() const
 {
 	cout << "Loaded skill data" << endl;
-	for (int i = 0; i < skill_.size(); i++)
+	for (vector<int>::size_type i = 0; i < skill_.size(); i++)
 		cout << "[" << skill_[i][0] << "] " << skill_name_[i] << " | type : " << skill_[i][1] << " | value : " << skill_[i][2] << skill_[i][1] << " | cost : " << skill_[i][3] << endl;
 }
 
-string SkillData::getName(int code)
+string SkillData::getName(int code) const
 {
-	string skill_name;
-	skill_name = skill_name_[code];
-	return skill_name;
+	return skill_name_[code];
 }

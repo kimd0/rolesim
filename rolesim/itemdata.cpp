@@ -5,13 +5,13 @@ ItemData::ItemData()
 	loadData();
 }
 
-void ItemData::readFile(string file_name)
+void ItemData::readFile(const string& file_name)
 {
 	ifstream read_file;
-	string read_line;
 	read_file.open(file_name);
 	if (read_file.is_open())
 	{
+		string read_line;
 		while(getline(read_file, read_line))
 		{
 			stringstream sstream(read_line);
@@ -39,7 +39,7 @@ void ItemData::loadData()
 {
 	readFile("item\\item.txt");
 	//check integrity by comparing item code and array index, size check
-	for (int i = 0; i < item_.size(); ++i)
+	for (vector<int>::size_type i = 0; i < item_.size(); ++i)
 	{
 		if (item_[i].size() != 3 || item_name_[i].empty())
 			cout << "[Error] Please check item data integrity. Error item code " << i << endl;
@@ -51,16 +51,14 @@ void ItemData::loadData()
 	}
 }
 
-void ItemData::showData()
+void ItemData::showData() const
 {
 	cout << "Loaded item data" << endl;
-	for (int i = 0; i < item_.size(); i++)
+	for (vector<int>::size_type i = 0; i < item_.size(); i++)
 		cout << "[" << item_[i][0] << "] " << item_name_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
 }
 
-string ItemData::getName(int code)
+string ItemData::getName(int code) const
 {
-	string item_name;
-	item_name = item_name_[code];
-	return item_name;
+	return item_name_[code];
 }

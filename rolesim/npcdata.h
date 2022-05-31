@@ -1,14 +1,9 @@
 #pragma once
 
-#include <string>
 #include <vector>
-#include <iostream>
-#include <sstream>
 #include <fstream>
-#include <algorithm>
+#include <iostream>
 #include <filesystem>
-#include <cstdlib>
-#include <ctime>
 #include "npc.h"
 
 using namespace std;

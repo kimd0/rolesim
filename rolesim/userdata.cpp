@@ -15,10 +15,10 @@ UserData::UserData()
 void UserData::readFile(string file_name)
 {
 	ifstream read_file;
-	string read_line;
 	read_file.open(file_name);
 	if (read_file.is_open())
 	{
+		string read_line;
 		getline(read_file, name_); //user name
 		getline(read_file, read_line);
 		level_ = stoi(read_line);
@@ -31,42 +31,43 @@ void UserData::readFile(string file_name)
 
 		//user skill with comma
 		getline(read_file, read_line);
-		stringstream kstream(read_line);
+		stringstream skill_stream(read_line);
 		string skill;
-		while (getline(kstream, skill, '/'))
+		while (getline(skill_stream, skill, '/'))
 		{
 			skill_.push_back(stoi(skill));
 		}
 
 		//user item with comma
 		getline(read_file, read_line);
-		stringstream istream(read_line);
+		stringstream item_stream(read_line);
 		string item;
-		while (getline(istream, item, '/'))
+		while (getline(item_stream, item, '/'))
 		{
 			item_.push_back(stoi(item));
 		}
 	}
 }
 
-void UserData::writeFile(string file_name)
+void UserData::writeFile(string file_name) const
 {
 	ofstream write_file(file_name);
-	string temp_string = "";
+
 	if (write_file.is_open()) {
+		string temp_string;
 		write_file << name_ << endl;
 		write_file << level_ << endl;
 		write_file << health_ << endl;
 		write_file << mana_ << endl;
 		write_file << money_ << endl;
 
-		for (int i = 0; i < skill_.size(); ++i)
-			temp_string += to_string(skill_[i]) + "/";
+		for (int i : skill_)
+			temp_string += to_string(i) + "/";
 		if(!temp_string.empty()) temp_string.pop_back();
 		temp_string += "\n";
 
-		for (int i = 0; i < item_.size(); ++i)
-			temp_string += to_string(item_[i]) + "/";
+		for (int i : item_)
+			temp_string += to_string(i) + "/";
 		if (!temp_string.empty()) temp_string.pop_back();
 
 		write_file << temp_string;
@@ -76,11 +77,10 @@ void UserData::writeFile(string file_name)
 
 void UserData::getUserList()
 {
-	string user;
-	filesystem::path p("./user");
-	for (auto& p : filesystem::recursive_directory_iterator(p))
+	const filesystem::path user_path("./user");
+	for (auto& i : filesystem::recursive_directory_iterator(user_path))
 	{
-		user = p.path().filename().string();
+		string user = i.path().filename().string();
 		user = user.substr(0, user.length() - 4);
 		user_list_.push_back(user);
 	}
@@ -92,8 +92,8 @@ void UserData::selectData()
 	cout << "-----------------------------" << endl;
 	cout << "Saved Data" << endl;
 	cout << "-----------------------------" << endl;
-	for (int i = 0; i < user_list_.size(); ++i)
-		cout << user_list_[i] << endl;
+	for (auto& i : user_list_)
+		cout << i << endl;
 	cout << "-----------------------------" << endl;
 
 	while (true)
@@ -113,10 +113,10 @@ void UserData::selectData()
 	}
 }
 
-bool UserData::checkData(string user)
+bool UserData::checkData(string user) const
 {
-	filesystem::path p("./user/" + user + ".txt");
-	if (filesystem::exists(p))
+	const filesystem::path user_data("./user/" + user + ".txt");
+	if (filesystem::exists(user_data))
 		return true;
 	else
 		return false;
@@ -156,7 +156,7 @@ void UserData::loadData()
 	selectData();
 }
 
-void UserData::saveData()
+void UserData::saveData() const
 {
 	writeFile("user\\" + name_ + ".txt");
 }
@@ -178,14 +178,14 @@ void UserData::showData(SkillData &skilldata, ItemData &itemdata) const
 	cout << "---------------------------------------------" << endl;
 	cout << "\t[Skills]" << endl;
 	cout << "---------------------------------------------" << endl;
-	for (int i = 0; i < skill_.size(); ++i)
-		cout << skilldata.getName(skill_[i]) << endl;
+	for (int i : skill_)
+		cout << skilldata.getName(i) << endl;
 	cout << "---------------------------------------------" << endl;
 	cout << "\t[Inventory]" << endl;
 	cout << "---------------------------------------------" << endl;
-	for (int i = 0; i < item_.size(); ++i)
-		cout << itemdata.getName(item_[i]) << endl;
-	cout << endl;
+	for (int i : item_)
+		cout << itemdata.getName(i) << endl;
+	cout << "---------------------------------------------" << endl;
 }
 
 void UserData::addSkill(int code)

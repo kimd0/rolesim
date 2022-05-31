@@ -2,10 +2,6 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <algorithm>
 #include <filesystem>
 #include "itemdata.h"
 #include "skilldata.h"
@@ -24,16 +20,16 @@ private:
 	vector<int> item_;
 	vector<string> user_list_;
 	void readFile(string);
-	void writeFile(string);
+	void writeFile(string) const;
 	void getUserList();
 	void selectData();
-	bool checkData(string);
+	bool checkData(string) const;
 	bool checkUser(string);
 public:
 	UserData();
 	void newData();
 	void loadData();
-	void saveData();
+	void saveData() const;
 	void showData(SkillData&, ItemData&) const;
 	void removeData();
 	void addSkill(int);

@@ -8,15 +8,16 @@ NpcData::NpcData()
 void NpcData::readFile(int code)
 {
 	ifstream read_file;
-	string read_line;
-	string name, item;
-	vector<string> new_scripts;
-	vector<int> new_items;
-	vector<int> new_skills;
 
 	read_file.open("npc\\" + to_string(code) + ".txt");
 	if (read_file.is_open())
 	{
+		vector<int> new_skills;
+		vector<int> new_items;
+		vector<string> new_scripts;
+		string name;
+		string item;
+		string read_line;
 		getline(read_file, read_line); //name
 		name = read_line;
 		getline(read_file, read_line); //script1
@@ -46,9 +47,9 @@ void NpcData::readFile(int code)
 void NpcData::loadData()
 {
 	int npc_number = 0;
-	filesystem::path p("./npc");
+	const filesystem::path npc_path("./npc");
 
-	for (auto& p : filesystem::recursive_directory_iterator(p))
+	for (auto& i : filesystem::recursive_directory_iterator(npc_path))
 		npc_number++;
 
 	for (int i =0; i < npc_number; ++i)
@@ -57,6 +58,9 @@ void NpcData::loadData()
 
 Npc NpcData::getRandomNpc()
 {
-	srand((unsigned int)time(NULL));
-	return npcs_[rand() % npcs_.size()];
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dist(0, npcs_.size() - 1);
+
+	return npcs_[dist(gen)];
 }

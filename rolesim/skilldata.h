@@ -17,7 +17,7 @@ private:
 	void ReadFile(string);
 public:
 	SkillData();
-	void LoadData();
+	virtual void LoadData();
 	string GetName(int);
 };
 

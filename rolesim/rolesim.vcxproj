@@ -144,12 +144,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="npcdata.cpp" />
     <ClCompile Include="playdata.cpp" />
+    <ClCompile Include="userdata.cpp" />
     <ClCompile Include="skilldata.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="itemdata.h" />
     <ClInclude Include="npcdata.h" />
     <ClInclude Include="playdata.h" />
+    <ClInclude Include="userdata.h" />
     <ClInclude Include="skilldata.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

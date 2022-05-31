@@ -1,41 +1,24 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <algorithm>
-#include <filesystem>
+#include "userdata.h"
+#include "npcdata.h"
 #include "itemdata.h"
 #include "skilldata.h"
-
-using namespace std;
 
 class PlayData
 {
 private:
-	string name_;
-	int level_;
-	int health_;
-	int mana_;
-	int money_;
-	vector<int> skill_;
-	vector<int> item_;
-	vector<string> player_list_;
-	void ReadFile(string);
-	void WriteFile(string);
-	void GetPlayerList();
-	void SelectData();
-	bool CheckData(string);
-	bool CheckPlayer(string);
+	UserData *user_data_;
+	ItemData *item_data_;
+	SkillData *skill_data_;
+	NpcData *npc_data_;
+
 public:
 	PlayData();
-	void NewData();
+	~PlayData();
 	void LoadData();
-	void SaveData();
-	void ShowData(SkillData&, ItemData&);
-	void RemoveData();
-	void AddSkill(int);
-	void AddItem(int);
+	void NewGame();
+	void LoadGame();
+	void SaveGame();
+	void ShowInfo();
 };

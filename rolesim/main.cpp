@@ -1,35 +1,30 @@
 ﻿#include <iostream>
 #include "playdata.h"
-#include "itemdata.h"
-#include "npcdata.h"
 
 using namespace std;
 
 int main()
 {
     int input;
-    ItemData item_data;
-    SkillData skill_data;
     PlayData play_data;
-    NpcData npc_data;
 
-    cout << "-----------------------------" << endl;
-    cout << "Role playing game simulator" << endl;
-    cout << "-----------------------------" << endl;
-    cout << "1) New Game    2) Load Game" << endl;
-    cout << "-----------------------------" << endl;
+    cout << "---------------------------------------------" << endl;
+    cout << "\tRole playing game simulator\t" << endl;
+    cout << "---------------------------------------------" << endl;
+    cout << "\t1) New Game\t 2) Load Game" << endl;
+    cout << "---------------------------------------------" << endl;
     while (true)
     {
-        cout << "Input : ";
+        cout << "Input: ";
         cin >> input;
         if (input == 1)
         {
-            play_data.NewData();
+            play_data.NewGame();
             break;
         }
         else if (input == 2)
         {
-            play_data.LoadData();
+            play_data.LoadGame();
             break;
         }
         else
@@ -38,7 +33,7 @@ int main()
             fflush(stdin);
         }
     }
-    play_data.ShowData(skill_data, item_data);
+    play_data.ShowInfo();
 
     //actual game play (combat)
     while (true)
@@ -46,5 +41,7 @@ int main()
 
     }
 
-    play_data.SaveData();
+    play_data.SaveGame();
+
+    return 0;
 }

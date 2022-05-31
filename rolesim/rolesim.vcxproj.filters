@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="playdata.cpp">
+    <ClCompile Include="userdata.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="skilldata.cpp">
@@ -30,9 +30,12 @@
     <ClCompile Include="npcdata.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="playdata.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="playdata.h">
+    <ClInclude Include="userdata.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="skilldata.h">
@@ -42,6 +45,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="npcdata.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="playdata.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

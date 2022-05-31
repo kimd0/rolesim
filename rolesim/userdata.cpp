@@ -194,10 +194,18 @@ void UserData::ShowData(SkillData &skilldata, ItemData &itemdata) const
 void UserData::AddSkill(int code)
 {
 	if (find(skill_.begin(), skill_.end(), code) == skill_.end())
+	{
 		skill_.push_back(code);
+		sort(skill_.begin(), skill_.end());
+	}
+	else
+	{
+		cout << "[Info] You already have the skill." << endl;
+	}
 }
 
 void UserData::AddItem(int code)
 {
 	item_.push_back(code);
+	sort(item_.begin(), item_.end());
 }

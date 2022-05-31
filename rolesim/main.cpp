@@ -17,6 +17,7 @@ int main()
     cout << "---------------------------------------------" << endl;
     while (true)
     {
+        fflush(stdin);
         cout << "Input: ";
         cin >> input;
         if (input == 1)
@@ -32,7 +33,6 @@ int main()
         else
         {
             cout << "Please enter valid input." << endl;
-            fflush(stdin);
         }
     }
     play_data->ShowInfo();
@@ -47,10 +47,6 @@ int main()
 
     cout << "[Info] Your adventure is over." << endl;
     play_data->SaveGame();
-
-
-    delete play_data;
-    delete stage_manager;
 
     return 0;
 }

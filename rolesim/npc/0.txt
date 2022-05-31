@@ -1,5 +1,6 @@
 Kindman
-Hi
-Hello
-script3
+Hi, I'm Kindman. Let me help you.
+Hello. It's glad to see you. Get this.
+Good afternoon, good evening and good night.
 0/1/3/4
+3/4/5/6

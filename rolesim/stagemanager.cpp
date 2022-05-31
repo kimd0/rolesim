@@ -71,17 +71,26 @@ bool StageManager::MonsterStage()
 
 void StageManager::NpcStage()
 {
-	int npc_code = npc_data_->GetRandomCode();
-	int npc_item = npc_data_->GetRandomItem(npc_code);
-	string npc_name = npc_data_->GetName(npc_code);
-	string npc_script = npc_data_->GetRandomScript(npc_code);
+	Npc new_npc = npc_data_->GetRandomNpc();
+	vector<int> npc_reward = new_npc.getReward();
 
 	//npc encounter
 	cout << endl;
 	cout << "---------------------------------------------" << endl;
 	cout << "[Info] A voice comes from somewhere..." << endl;
-	cout << "[Info] " << npc_name << " : " << npc_script << endl;
-	cout << "[Info] " << npc_name << " gave you the item, ["<< play_data_.GetItemInfo(npc_item) << "] and disappeared." << endl;
+	cout << "[Info] " << new_npc.getName() << " : " << new_npc.getScript() << endl;
+
+	if (npc_reward[0] == 0)
+	{
+		cout << "[Info] " << new_npc.getName() << " gave you the item, ["
+			<< play_data_.GetItemInfo(npc_reward[1]) << "] and disappeared." << endl;
+		play_data_.GainItem(npc_reward[1]);
+	}
+	else
+	{
+		cout << "[Info] " << new_npc.getName() << " teached you the skill, ["
+			<< play_data_.GetSkillInfo(npc_reward[1]) << "] and disappeared." << endl;
+		play_data_.GainSkill(npc_reward[1]);
+	}
 	cout << "---------------------------------------------" << endl;
-	play_data_.GainItem(npc_item);
 }

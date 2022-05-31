@@ -9,20 +9,17 @@
 #include <filesystem>
 #include <cstdlib>
 #include <ctime>
+#include "npc.h"
 
 using namespace std;
 
 class NpcData
 {
 private:
-	vector<vector<string>> npc_text_;
-	vector<vector<int>> npc_item_;
+	vector<Npc> npcs_;
 	void ReadFile(int);
 public:
 	NpcData();
 	void LoadData();
-	int GetRandomCode();
-	string GetName(int);
-	string GetRandomScript(int);
-	int GetRandomItem(int);
+	Npc GetRandomNpc();
 };

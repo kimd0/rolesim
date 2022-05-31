@@ -54,7 +54,7 @@ string PlayData::GetItemInfo(int code)
 	return item_data_->GetName(code);
 }
 
-string PlayData::GetSkilInfo(int code)
+string PlayData::GetSkillInfo(int code)
 {
 	return skill_data_->GetName(code);
 }

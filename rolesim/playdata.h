@@ -23,5 +23,5 @@ public:
 	void GainItem(int);
 	void GainSkill(int);
 	string GetItemInfo(int);
-	string GetSkilInfo(int);
+	string GetSkillInfo(int);
 };

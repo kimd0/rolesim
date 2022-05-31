@@ -17,7 +17,8 @@ bool StageManager::NewStage()
 
 	while (true)
 	{
-		cout << "\n---------------------------------------------" << endl;
+		cout << endl;
+		cout << "---------------------------------------------" << endl;
 		cout << "[Info] An endless dungeon unfolds before your eyes." << endl;
 		cout << "1) Go\t2) Stop\t3) Status" << endl;
 		cout << "---------------------------------------------" << endl;
@@ -48,6 +49,11 @@ bool StageManager::NewStage()
 		{
 			play_data_.ShowInfo();
 		}
+		else
+		{
+			cout << "[Info] Please enter valid input." << endl;
+			fflush(stdin);
+		}
 	}
 	return true;
 }
@@ -71,7 +77,8 @@ void StageManager::NpcStage()
 	string npc_script = npc_data_->GetRandomScript(npc_code);
 
 	//npc encounter
-	cout << "\n---------------------------------------------" << endl;
+	cout << endl;
+	cout << "---------------------------------------------" << endl;
 	cout << "[Info] A voice comes from somewhere..." << endl;
 	cout << "[Info] " << npc_name << " : " << npc_script << endl;
 	cout << "[Info] " << npc_name << " gave you the item, ["<< play_data_.GetItemInfo(npc_item) << "] and disappeared." << endl;

@@ -3,6 +3,7 @@
 NpcData::NpcData()
 {
 	loadData();
+	cout << "[Info] Npc data loaded." << endl;
 }
 
 void NpcData::readFile(int code)

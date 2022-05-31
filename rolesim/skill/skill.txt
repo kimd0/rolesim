@@ -1,7 +1,8 @@
-0/Double Slash/0/1.5/50
-1/Keen Piercing/0/2/70
-2/Shoulder Charge/0/1/30
-3/Fire Ball/1/3/100
-4/Ice Ball/2/3/100
-5/Mud Ball/3/3/100
-6/Wind Ball/4/3/100
+0/Slash/0/2/0
+1/Double Slash/0/5/50
+2/Keen Piercing/0/10/70
+3/Shoulder Charge/0/3/30
+4/Fire Ball/1/10/100
+5/Water Ball/2/8/100
+6/Mud Ball/3/8/100
+7/Wind Ball/4/8/100

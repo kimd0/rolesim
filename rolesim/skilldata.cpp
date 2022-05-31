@@ -3,6 +3,7 @@
 SkillData::SkillData()
 {
 	loadData();
+	cout << "[Info] Skill data loaded." << endl;
 }
 
 void SkillData::readFile(const string& file_name)
@@ -58,7 +59,7 @@ void SkillData::loadData()
 
 void SkillData::showData() const
 {
-	cout << "Loaded skill data" << endl;
+	cout << "Total " << skill_.size() << " skills loaded." << endl;
 	for (vector<int>::size_type i = 0; i < skill_.size(); i++)
 		cout << "[" << skill_[i][0] << "] " << skill_name_[i] << " | type : " << skill_[i][1] << " | value : " << skill_[i][2] << skill_[i][1] << " | cost : " << skill_[i][3] << endl;
 }
@@ -66,4 +67,11 @@ void SkillData::showData() const
 string SkillData::getName(int code) const
 {
 	return skill_name_[code];
+}
+
+vector<int> SkillData::getData(int code) const
+{
+	// return [code, type, value, cost]
+	// type = 0 : X, 1: fire, 2: Ice, 3: Mud, 4: Wind
+	return skill_[code];
 }

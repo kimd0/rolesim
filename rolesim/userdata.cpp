@@ -5,7 +5,10 @@ UserData::UserData()
 	name_ = "";
 	level_ = 1;
 	health_ = 100;
+	current_health_ = 100;
 	mana_ = 50;
+	current_mana_ = 50;
+	experience_ = 0;
 	money_ = 1000;
 	skill_ = {};
 	item_ = {};
@@ -19,17 +22,19 @@ void UserData::readFile(string file_name)
 	if (read_file.is_open())
 	{
 		string read_line;
-		getline(read_file, name_); //user name
-		getline(read_file, read_line);
+		getline(read_file, name_); //name
+		getline(read_file, read_line); //level
 		level_ = stoi(read_line);
-		getline(read_file, read_line);
+		getline(read_file, read_line); //exp
+		experience_ = stoi(read_line);
+		getline(read_file, read_line); //hp
 		health_ = stoi(read_line);
-		getline(read_file, read_line);
+		getline(read_file, read_line); //mp
 		mana_ = stoi(read_line);
-		getline(read_file, read_line);
+		getline(read_file, read_line); //money
 		money_ = stoi(read_line);
 
-		//user skill with comma
+		//user skill with slash
 		getline(read_file, read_line);
 		stringstream skill_stream(read_line);
 		string skill;
@@ -38,7 +43,7 @@ void UserData::readFile(string file_name)
 			skill_.push_back(stoi(skill));
 		}
 
-		//user item with comma
+		//user item with slash
 		getline(read_file, read_line);
 		stringstream item_stream(read_line);
 		string item;
@@ -57,6 +62,7 @@ void UserData::writeFile(string file_name) const
 		string temp_string;
 		write_file << name_ << endl;
 		write_file << level_ << endl;
+		write_file << experience_ << endl;
 		write_file << health_ << endl;
 		write_file << mana_ << endl;
 		write_file << money_ << endl;
@@ -154,6 +160,8 @@ void UserData::newData()
 void UserData::loadData()
 {
 	selectData();
+	current_health_ = health_;
+	current_mana_ = mana_;
 }
 
 void UserData::saveData() const
@@ -172,7 +180,17 @@ void UserData::showData(ItemData& itemdata) const
 	cout << "\t[Inventory]" << endl;
 	cout << "---------------------------------------------" << endl;
 	for (vector<int>::size_type i = 0; i < item_.size(); i++)
-		cout << "[ " << i << " ] " << itemdata.getName(i) << endl;
+	{
+		vector<int> new_item = itemdata.getData(item_[i]);
+		cout << "[ " << i << " ] " << itemdata.getName(item_[i]) << " | Effect : ";
+		if (new_item[1] == 0)
+			cout << "Health +";
+		else if (new_item[1] == 1)
+			cout << "Mana +";
+		else if (new_item[1] == 2)
+			cout << "Give damage ";
+		cout << new_item[2] << endl;
+	}
 	cout << "---------------------------------------------" << endl;
 }
 
@@ -182,8 +200,22 @@ void UserData::showData(SkillData& skilldata) const
 	cout << "---------------------------------------------" << endl;
 	cout << "\t[Skills]" << endl;
 	cout << "---------------------------------------------" << endl;
-	for (int i : skill_)
-		cout << "[ " << i << " ] " << skilldata.getName(i) << endl;
+	for (vector<int>::size_type i = 0; i < skill_.size(); ++i)
+	{
+		vector<int> new_skill = skilldata.getData(skill_[i]);
+		cout << "[ " << i << " ] " << skilldata.getName(skill_[i]) << " | Type : ";
+		if (new_skill[1] == 0)
+			cout << "Normal";
+		else if (new_skill[1] == 1)
+			cout << "Fire";
+		else if (new_skill[1] == 2)
+			cout << "Water";
+		else if (new_skill[1] == 3)
+			cout << "Earth";
+		else if (new_skill[1] == 4)
+			cout << "Wind";
+		cout << " | Damage : " << new_skill[2] * level_ * 10 << " | Cost : " << new_skill[3] << endl;
+	}
 	cout << "---------------------------------------------" << endl;
 }
 
@@ -192,21 +224,13 @@ void UserData::showData(SkillData &skilldata, ItemData &itemdata) const
 	cout << "\n---------------------------------------------" << endl;
 	cout << "\t[Character Status]" << endl;
 	cout << "---------------------------------------------" << endl;
-	cout << "[LV." << level_ << "] " << name_ << endl;
+	cout << "[LV." << level_ << " (" << experience_ << " / 100) ] " << name_ << endl;
 	cout << "Health : " << health_ << endl;
 	cout << "Mana : " << mana_ << endl;
 	cout << "Money : " << money_ << endl;
 	cout << "---------------------------------------------" << endl;
-	cout << "\t[Skills]" << endl;
-	cout << "---------------------------------------------" << endl;
-	for (int i : skill_)
-		cout << skilldata.getName(i) << endl;
-	cout << "---------------------------------------------" << endl;
-	cout << "\t[Inventory]" << endl;
-	cout << "---------------------------------------------" << endl;
-	for (int i : item_)
-		cout << itemdata.getName(i) << endl;
-	cout << "---------------------------------------------" << endl;
+	showData(skilldata);
+	showData(itemdata);
 }
 
 void UserData::addSkill(int code)
@@ -236,9 +260,10 @@ int UserData::useItem(ItemData& item_data, int index)
 		return 0;
 	}
 
-	vector<int> item_effect = item_data.getEffect(item_[index]);
+	vector<int> item_effect = item_data.getData(item_[index]);
 	item_.erase(item_.begin() + index);
 
+	cout << "[Info] " << item_data.getName(item_effect[0]) << " used." << endl;
 	if(item_effect[1] == 0)//health
 	{
 		cout << "[Info] Recovered health +" << item_effect[2] << endl;
@@ -258,18 +283,76 @@ int UserData::useItem(ItemData& item_data, int index)
 	}
 }
 
-void UserData::addHealth(int value)
+int UserData::useSkill(SkillData& skill_data, int index)
 {
-	cout << "[Info] Health " << health_;
-	health_ += value;
-	cout << " -> " << health_ << endl;
+	if (skill_.size() <= index)
+	{
+		cout << "[Info] Can't use that skill. (Out of range)" << endl;
+		return 0;
+	}
+
+	vector<int> skill_effect = skill_data.getData(skill_[index]);
+
+	if (mana_ > skill_effect[3])
+	{
+		cout << "[Info] Skill - [" << skill_data.getName(skill_effect[0]) << "]" << endl;
+		addMana(-skill_effect[3]);
+		return level_ * skill_effect[2] * 10;
+	}
+	else
+	{
+		cout << "[Info] Skill execution failed due to lack of mana."  << endl;
+		return 0;
+	}
 }
 
-void UserData::addMana(int value)
+int UserData::addExperience(int value)
 {
-	cout << "[Info] Mana " << mana_;
-	mana_ += value;
-	cout << " -> " << mana_ << endl;
+	cout << "[Info] EXP " << experience_ << "% -> ";
+	experience_ += value;
+	cout << experience_ << "%" << endl;
+	if (experience_ >= 100)
+	{
+		experience_ %= 100;
+		levelUp();
+	}
+	return experience_;
+}
+
+void UserData::levelUp()
+{
+	cout << "[Info] Congratulations! Level UP!" << endl;
+	cout << "[Info] LV." << level_;
+	level_ += 1;
+	cout << " -> LV." << level_ << endl;
+	cout << "[Info] Health " << health_ << " Mana " << mana_;
+	health_ += level_ * 2;
+	mana_ += level_;
+	cout << " -> Health " << health_ << " Mana " << mana_ << endl;
+}
+
+int UserData::addHealth(int value)
+{
+	cout << "[Info] Health " << current_health_ << "/" << health_;
+	current_health_ += value;
+	if (current_health_ < 0)
+		current_health_ = 0;
+	else if (current_health_ > health_)
+		current_health_ = health_;
+	cout << " -> " << current_health_ << "/" << health_ << endl;
+	return current_health_;
+}
+
+int UserData::addMana(int value)
+{
+	cout << "[Info] Mana " << current_mana_ << "/" << mana_;
+	current_mana_ += value;
+	if (current_mana_ < 0)
+		current_mana_ = 0;
+	else if (current_mana_ > mana_)
+		current_mana_ = mana_;
+	cout << " -> " << current_mana_ << "/" << mana_ << endl;
+	return current_mana_;
 }
 
 void UserData::addMoney(int value)
@@ -280,4 +363,10 @@ void UserData::addMoney(int value)
 int UserData::getLevel()
 {
 	return level_;
+}
+
+void UserData::showCondition() const
+{
+	cout << "[Health] " << current_health_ << "/" << health_;
+	cout << " [Mana] " << current_mana_ << "/" << mana_ << endl;
 }

@@ -19,6 +19,7 @@ public:
 	void loadData();
 	void showData() const;
 	string getName(int) const;
+	vector<int> getData(int) const;
 };
 
 

@@ -3,6 +3,7 @@
 PlayData::PlayData()
 {
 	loadData();
+	cout << "[Info] Play data loaded." << endl;
 }
 
 PlayData::~PlayData()
@@ -44,6 +45,16 @@ void PlayData::showInventory() const
 	user_data_->showData(*item_data_);
 }
 
+void PlayData::showSkill() const
+{
+	user_data_->showData(*skill_data_);
+}
+
+void PlayData::showCondition() const
+{
+	user_data_->showCondition();
+}
+
 void PlayData::gainItem(int code) const
 {
 	user_data_->addItem(code);
@@ -54,19 +65,34 @@ void PlayData::gainSkill(int code) const
 	user_data_->addSkill(code);
 }
 
-void PlayData::changeHealth(int value) const
+void PlayData::gainExperience(int value) const
 {
-	user_data_->addHealth(value);
+	user_data_->addExperience(value);
 }
 
-void PlayData::changeMana(int value) const
+void PlayData::gainMoney(int value) const
 {
-	user_data_->addMana(value);
+	user_data_->addMoney(value);
+}
+
+int PlayData::changeHealth(int value) const
+{
+	return user_data_->addHealth(value);
+}
+
+int PlayData::changeMana(int value) const
+{
+	return user_data_->addMana(value);
 }
 
 int PlayData::useItem(int index) const
 {
 	return user_data_->useItem(*item_data_, index);
+}
+
+int PlayData::useSkill(int index) const
+{
+	return user_data_->useSkill(*skill_data_, index);
 }
 
 string PlayData::getItemInfo(int code) const

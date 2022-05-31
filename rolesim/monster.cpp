@@ -33,7 +33,7 @@ void Monster::setDifficulty(int player_level)
 {
 	double new_level = (100.0 + level_) / 100 * player_level;
 	level_ = round(new_level);
-	health_ += level_ * 100;
+	health_ += level_ * 50;
 }
 
 vector<int> Monster::getReward()
@@ -43,4 +43,14 @@ vector<int> Monster::getReward()
 	rewards.push_back(items_[level_ % items_.size()]);
 
 	return rewards;
+}
+
+int Monster::actionAtk()
+{
+	return -level_;
+}
+
+void Monster::actionDef(int value)
+{
+	health_ -= value;
 }

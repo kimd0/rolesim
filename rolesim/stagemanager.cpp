@@ -1,8 +1,8 @@
 #include "stagemanager.h"
 
-StageManager::StageManager(PlayData& play_data)
+StageManager::StageManager(const PlayData& play_data)
 {
-	play_data_ = play_data;
+	play_data_ = &play_data;
 	npc_data_ = new NpcData();
 	monster_data_ = new MonsterData();
 }
@@ -10,6 +10,7 @@ StageManager::StageManager(PlayData& play_data)
 StageManager::~StageManager()
 {
 	delete npc_data_;
+	delete monster_data_;
 }
 
 bool StageManager::newStage()
@@ -31,7 +32,7 @@ bool StageManager::newStage()
 		{
 			system("cls");
 
-			if (computeProb(70)) //for test. should be 70%
+			if (computeProb(0)) //for test. should be 70%
 			{
 				if (monsterStage())
 					break;
@@ -48,19 +49,19 @@ bool StageManager::newStage()
 		{
 			system("cls");
 			//item show / use
-			play_data_.showInventory();
+			play_data_->showInventory();
 			cout << "[Tip] Input -1 to Cancel." << endl;
 			cout << "---------------------------------------------" << endl;
 			cout << "Select item : ";
 			fflush(stdin);
 			cin >> input;
 			if (input != -1)
-				play_data_.useItem(input);
+				play_data_->useItem(input);
 		}
 		else if (input == 3)
 		{
 			system("cls");
-			play_data_.showInfo();
+			play_data_->showInfo();
 		}
 		else if (input == 4)
 		{
@@ -78,8 +79,10 @@ bool StageManager::newStage()
 bool StageManager::monsterStage()
 {
 	int input;
+	int max_health;
 	Monster new_monster = monster_data_->getRandomMonster();
-	new_monster.setDifficulty(play_data_.getLevelInfo());
+	new_monster.setDifficulty(play_data_->getLevelInfo());
+	max_health = new_monster.getHealth();
 
 	system("cls");
 	cout << "---------------------------------------------" << endl;
@@ -106,13 +109,17 @@ bool StageManager::monsterStage()
 			if (computeProb(50))
 			{
 				cout << "[Info] Successfully escaped from the monster." << endl;
-				break;
+				return true;
 			}
 			else
 			{
 				cout << "[Info] Failed to escape from the monster." << endl;
 				//need to add disadvantage
-				play_data_.changeHealth(-100);
+				if (play_data_->changeHealth(-50) <= 0)
+				{
+					cout << "[Info] You lost your mind and passed out." << endl;
+					return false;
+				}
 				
 			}
 		}
@@ -121,7 +128,57 @@ bool StageManager::monsterStage()
 			cout << "[Info] Please enter valid input." << endl;
 		}
 	}
-	//need to implement combat here
+	system("cls");
+	while (true)
+	{
+		cout << "---------------------------------------------" << endl;
+		cout << new_monster.getAppearence() << endl;
+		cout << "[ Lvl. " << new_monster.getLevel() << " ] " << new_monster.getName() << endl;
+		cout << "Health : " << new_monster.getHealth() << " / " << max_health << endl;
+		cout << "---------------------------------------------" << endl;
+		cout << "You :";
+		play_data_->showCondition();
+		cout << "---------------------------------------------" << endl;
+		cout << "1) Use Skill\t2) Use Item" << endl;
+		cout << "Select Input : ";
+		cin >> input;
+		if (input == 1)
+		{
+			play_data_->showSkill();
+			cout << "Select skill : ";
+			cin >> input;
+			new_monster.actionDef(play_data_->useSkill(input));
+		}
+		else if (input == 2)
+		{
+			play_data_->showInventory();
+			cout << "Select item : ";
+			cin >> input;
+			new_monster.actionDef(play_data_->useItem(input));
+		}
+		else
+		{
+			cout << "[Info] The turn is passed due to the wrong choice.";
+		}
+
+		if (new_monster.getHealth() <= 0)
+		{
+			vector<int> reward = new_monster.getReward();
+			cout << "[Info] You win!" << endl;
+			play_data_->gainMoney(reward[0]);
+			play_data_->gainItem(reward[1]);
+			play_data_->gainExperience(10.0 * new_monster.getLevel() / play_data_->getLevelInfo());
+			break;
+		}
+
+		cout << "[Info] Monster " << new_monster.getName() << " has attacked!" << endl;
+
+		if(play_data_->changeHealth(new_monster.actionAtk()) <= 0)
+		{
+			cout << "[Info] You lost your mind and passed out." << endl;
+			return false;
+		}
+	}
 	//player win / runaway (50%)) -> return true, lose -> return false.
 	return true;
 }
@@ -139,14 +196,14 @@ void StageManager::npcStage()
 	if (npc_reward[0] == 0)
 	{
 		cout << "[Info] " << new_npc.getName() << " gave you the item, ["
-			<< play_data_.getItemInfo(npc_reward[1]) << "] and disappeared." << endl;
-		play_data_.gainItem(npc_reward[1]);
+			<< play_data_->getItemInfo(npc_reward[1]) << "] and disappeared." << endl;
+		play_data_->gainItem(npc_reward[1]);
 	}
 	else
 	{
 		cout << "[Info] " << new_npc.getName() << " teached you the skill, ["
-			<< play_data_.getSkillInfo(npc_reward[1]) << "] and disappeared." << endl;
-		play_data_.gainSkill(npc_reward[1]);
+			<< play_data_->getSkillInfo(npc_reward[1]) << "] and disappeared." << endl;
+		play_data_->gainSkill(npc_reward[1]);
 	}
 	cout << "---------------------------------------------" << endl;
 }

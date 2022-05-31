@@ -3,6 +3,7 @@
 MonsterData::MonsterData()
 {
 	loadData();
+	cout << "[Info] Monster data loaded." << endl;
 }
 
 void MonsterData::readFile(int code)

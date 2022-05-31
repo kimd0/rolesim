@@ -22,6 +22,8 @@ public:
 	int getHealth();
 	string getAppearence();
 	void setDifficulty(int);
+	int actionAtk();
+	void actionDef(int);
 	vector<int> getReward();
 };
 

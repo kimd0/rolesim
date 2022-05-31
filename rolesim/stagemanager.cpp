@@ -11,12 +11,13 @@ StageManager::~StageManager()
 	delete npc_data_;
 }
 
-bool StageManager::NewStage()
+bool StageManager::newStage()
 {
 	int input;
 
 	while (true)
 	{
+		system("cls");
 		cout << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "[Info] An endless dungeon unfolds before your eyes." << endl;
@@ -30,14 +31,14 @@ bool StageManager::NewStage()
 			srand((unsigned int)time(NULL));
 			if (rand() % 100 < 0) //for test. should be "rand() % 100 < 70"
 			{
-				if (MonsterStage())
+				if (monsterStage())
 					break;
 				else
 					return false;
 			}
 			else
 			{
-				NpcStage();
+				npcStage();
 				break;
 			}
 		}
@@ -47,7 +48,8 @@ bool StageManager::NewStage()
 		}
 		else if (input == 3)
 		{
-			play_data_.ShowInfo();
+			system("cls");
+			play_data_.showInfo();
 		}
 		else
 		{
@@ -58,10 +60,12 @@ bool StageManager::NewStage()
 	return true;
 }
 
-bool StageManager::MonsterStage()
+bool StageManager::monsterStage()
 {
 	int input;
+
 	//monster encounter
+	system("cls");
 	cout << "1) Fight\t2) Run" << endl;
 	cin >> input;
 
@@ -69,13 +73,13 @@ bool StageManager::MonsterStage()
 	return true;
 }
 
-void StageManager::NpcStage()
+void StageManager::npcStage()
 {
-	Npc new_npc = npc_data_->GetRandomNpc();
+	Npc new_npc = npc_data_->getRandomNpc();
 	vector<int> npc_reward = new_npc.getReward();
 
 	//npc encounter
-	cout << endl;
+	system("cls");
 	cout << "---------------------------------------------" << endl;
 	cout << "[Info] A voice comes from somewhere..." << endl;
 	cout << "[Info] " << new_npc.getName() << " : " << new_npc.getScript() << endl;
@@ -83,14 +87,14 @@ void StageManager::NpcStage()
 	if (npc_reward[0] == 0)
 	{
 		cout << "[Info] " << new_npc.getName() << " gave you the item, ["
-			<< play_data_.GetItemInfo(npc_reward[1]) << "] and disappeared." << endl;
-		play_data_.GainItem(npc_reward[1]);
+			<< play_data_.getItemInfo(npc_reward[1]) << "] and disappeared." << endl;
+		play_data_.gainItem(npc_reward[1]);
 	}
 	else
 	{
 		cout << "[Info] " << new_npc.getName() << " teached you the skill, ["
-			<< play_data_.GetSkillInfo(npc_reward[1]) << "] and disappeared." << endl;
-		play_data_.GainSkill(npc_reward[1]);
+			<< play_data_.getSkillInfo(npc_reward[1]) << "] and disappeared." << endl;
+		play_data_.gainSkill(npc_reward[1]);
 	}
 	cout << "---------------------------------------------" << endl;
 }

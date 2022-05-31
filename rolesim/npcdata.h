@@ -17,9 +17,9 @@ class NpcData
 {
 private:
 	vector<Npc> npcs_;
-	void ReadFile(int);
+	void readFile(int);
 public:
 	NpcData();
-	void LoadData();
-	Npc GetRandomNpc();
+	void loadData();
+	Npc getRandomNpc();
 };

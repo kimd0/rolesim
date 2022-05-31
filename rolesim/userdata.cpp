@@ -9,10 +9,10 @@ UserData::UserData()
 	money_ = 1000;
 	skill_ = {};
 	item_ = {};
-	GetUserList();
+	getUserList();
 }
 
-void UserData::ReadFile(string file_name)
+void UserData::readFile(string file_name)
 {
 	ifstream read_file;
 	string read_line;
@@ -49,7 +49,7 @@ void UserData::ReadFile(string file_name)
 	}
 }
 
-void UserData::WriteFile(string file_name)
+void UserData::writeFile(string file_name)
 {
 	ofstream write_file(file_name);
 	string temp_string = "";
@@ -74,7 +74,7 @@ void UserData::WriteFile(string file_name)
 	}
 }
 
-void UserData::GetUserList()
+void UserData::getUserList()
 {
 	string user;
 	filesystem::path p("./user");
@@ -86,7 +86,7 @@ void UserData::GetUserList()
 	}
 }
 
-void UserData::SelectData()
+void UserData::selectData()
 {
 	string user_name;
 	cout << "-----------------------------" << endl;
@@ -98,24 +98,22 @@ void UserData::SelectData()
 
 	while (true)
 	{
+		fflush(stdin);
 		cout << "Input user name :";
 		cin >> user_name;
 
-		if (CheckUser(user_name))
+		if (checkUser(user_name))
 		{
 			cout << "[Success] Valid data name." << endl;
-			ReadFile("user\\" + user_name + ".txt");
+			readFile("user\\" + user_name + ".txt");
 			return;
 		}
 		else
-		{
 			cout << "[Error] Please input valid data name." << endl;
-			fflush(stdin);
-		}
 	}
 }
 
-bool UserData::CheckData(string user)
+bool UserData::checkData(string user)
 {
 	filesystem::path p("./user/" + user + ".txt");
 	if (filesystem::exists(p))
@@ -124,7 +122,7 @@ bool UserData::CheckData(string user)
 		return false;
 }
 
-bool UserData::CheckUser(string user)
+bool UserData::checkUser(string user)
 {
 	if (find(user_list_.begin(), user_list_.end(), user) != user_list_.end())
 		return true;
@@ -132,44 +130,43 @@ bool UserData::CheckUser(string user)
 		return false;
 }
 
-void UserData::NewData()
+void UserData::newData()
 {
 	string user;
 	while (true)
 	{
+		fflush(stdin);
 		cout << "Please input your name : ";
 		cin >> user;
 
-		if (CheckUser(user))
-		{
+		if (checkUser(user))
 			cout << "[Error] User name already exists." << endl;
-			fflush(stdin);
-		}
-		else break;
+		else
+			break;
 	}
 	name_ = user;
 	// Add basic item and skills to new user
-	AddItem(0);
-	AddSkill(0);
-	SaveData();
+	addItem(0);
+	addSkill(0);
+	saveData();
 }
 
-void UserData::LoadData()
+void UserData::loadData()
 {
-	SelectData();
+	selectData();
 }
 
-void UserData::SaveData()
+void UserData::saveData()
 {
-	WriteFile("user\\" + name_ + ".txt");
+	writeFile("user\\" + name_ + ".txt");
 }
 
-void UserData::RemoveData()
+void UserData::removeData()
 {
 
 }
 
-void UserData::ShowData(SkillData &skilldata, ItemData &itemdata) const
+void UserData::showData(SkillData &skilldata, ItemData &itemdata) const
 {
 	cout << "\n---------------------------------------------" << endl;
 	cout << "\t[Character Status]" << endl;
@@ -182,16 +179,16 @@ void UserData::ShowData(SkillData &skilldata, ItemData &itemdata) const
 	cout << "\t[Skills]" << endl;
 	cout << "---------------------------------------------" << endl;
 	for (int i = 0; i < skill_.size(); ++i)
-		cout << skilldata.GetName(skill_[i]) << endl;
+		cout << skilldata.getName(skill_[i]) << endl;
 	cout << "---------------------------------------------" << endl;
 	cout << "\t[Inventory]" << endl;
 	cout << "---------------------------------------------" << endl;
 	for (int i = 0; i < item_.size(); ++i)
-		cout << itemdata.GetName(item_[i]) << endl;
+		cout << itemdata.getName(item_[i]) << endl;
 	cout << endl;
 }
 
-void UserData::AddSkill(int code)
+void UserData::addSkill(int code)
 {
 	if (find(skill_.begin(), skill_.end(), code) == skill_.end())
 	{
@@ -204,8 +201,13 @@ void UserData::AddSkill(int code)
 	}
 }
 
-void UserData::AddItem(int code)
+void UserData::addItem(int code)
 {
 	item_.push_back(code);
 	sort(item_.begin(), item_.end());
+}
+
+void UserData::addMoney(int value)
+{
+	money_ += value;
 }

@@ -15,11 +15,12 @@ class SkillData
 private:
 	vector<vector<int>> skill_;
 	vector<string> skill_name_;
-	void ReadFile(string);
+	void readFile(string);
 public:
 	SkillData();
-	virtual void LoadData();
-	string GetName(int);
+	void loadData();
+	void showData();
+	string getName(int);
 };
 
 

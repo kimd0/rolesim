@@ -22,12 +22,12 @@ int main()
         cin >> input;
         if (input == 1)
         {
-            play_data->NewGame();
+            play_data->newGame();
             break;
         }
         else if (input == 2)
         {
-            play_data->LoadGame();
+            play_data->loadGame();
             break;
         }
         else
@@ -35,18 +35,18 @@ int main()
             cout << "Please enter valid input." << endl;
         }
     }
-    play_data->ShowInfo();
+    play_data->showInfo();
 
     //actual game play (combat)
     cout << "[Info] You have entered the dungeon." << endl;
     while (true)
     {
-        if (!stage_manager->NewStage())
+        if (!stage_manager->newStage())
             break;
     }
 
     cout << "[Info] Your adventure is over." << endl;
-    play_data->SaveGame();
+    play_data->saveGame();
 
     return 0;
 }

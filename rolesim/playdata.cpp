@@ -2,7 +2,7 @@
 
 PlayData::PlayData()
 {
-	LoadData();
+	loadData();
 }
 
 PlayData::~PlayData()
@@ -12,49 +12,49 @@ PlayData::~PlayData()
 	delete skill_data_;
 }
 
-void PlayData::LoadData()
+void PlayData::loadData()
 {
 	user_data_ = new UserData();
 	item_data_ = new ItemData();
 	skill_data_ = new SkillData();
 }
 
-void PlayData::NewGame()
+void PlayData::newGame()
 {
-	user_data_->NewData();
+	user_data_->newData();
 }
 
-void PlayData::LoadGame()
+void PlayData::loadGame()
 {
-	user_data_->LoadData();
+	user_data_->loadData();
 }
 
-void PlayData::SaveGame()
+void PlayData::saveGame()
 {
-	user_data_->SaveData();
+	user_data_->saveData();
 }
 
-void PlayData::ShowInfo()
+void PlayData::showInfo()
 {
-	user_data_->ShowData(*skill_data_, *item_data_);
+	user_data_->showData(*skill_data_, *item_data_);
 }
 
-void PlayData::GainItem(int code)
+void PlayData::gainItem(int code)
 {
-	user_data_->AddItem(code);
+	user_data_->addItem(code);
 }
 
-void PlayData::GainSkill(int code)
+void PlayData::gainSkill(int code)
 {
-	user_data_->AddSkill(code);
+	user_data_->addSkill(code);
 }
 
-string PlayData::GetItemInfo(int code)
+string PlayData::getItemInfo(int code)
 {
-	return item_data_->GetName(code);
+	return item_data_->getName(code);
 }
 
-string PlayData::GetSkillInfo(int code)
+string PlayData::getSkillInfo(int code)
 {
-	return skill_data_->GetName(code);
+	return skill_data_->getName(code);
 }

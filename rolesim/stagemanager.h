@@ -15,10 +15,10 @@ private:
 	//monster_data_ should be here
 	NpcData *npc_data_;
 	PlayData play_data_;
-	bool MonsterStage();
-	void NpcStage();
+	bool monsterStage();
+	void npcStage();
 public:
 	StageManager(PlayData&);
 	~StageManager();
-	bool NewStage();
+	bool newStage();
 };

@@ -2,10 +2,10 @@
 
 ItemData::ItemData()
 {
-	LoadData();
+	loadData();
 }
 
-void ItemData::ReadFile(string file_name)
+void ItemData::readFile(string file_name)
 {
 	ifstream read_file;
 	string read_line;
@@ -35,10 +35,10 @@ void ItemData::ReadFile(string file_name)
 	}
 }
 
-void ItemData::LoadData()
+void ItemData::loadData()
 {
-	ReadFile("item\\item.txt");
-	//check integrity by comparing item code and array index
+	readFile("item\\item.txt");
+	//check integrity by comparing item code and array index, size check
 	for (int i = 0; i < item_.size(); ++i)
 	{
 		if (item_[i].size() != 3 || item_name_[i].empty())
@@ -49,18 +49,16 @@ void ItemData::LoadData()
 			cout << "Wrong item code : " << item_[i][0] << "| name : " << item_name_[i] << endl;
 		}
 	}
-
-	/*
-	//show loaded data
-	cout << "Loaded item data" << endl;
-	for (int i = 0; i < item_.size(); i++)
-	{
-		cout << "[" << item_[i][0] << "] " << item_name_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
-	}
-	*/
 }
 
-string ItemData::GetName(int code)
+void ItemData::showData()
+{
+	cout << "Loaded item data" << endl;
+	for (int i = 0; i < item_.size(); i++)
+		cout << "[" << item_[i][0] << "] " << item_name_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
+}
+
+string ItemData::getName(int code)
 {
 	string item_name;
 	item_name = item_name_[code];

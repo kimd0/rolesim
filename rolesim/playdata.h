@@ -15,13 +15,13 @@ private:
 public:
 	PlayData();
 	~PlayData();
-	void LoadData();
-	void NewGame();
-	void LoadGame();
-	void SaveGame();
-	void ShowInfo();
-	void GainItem(int);
-	void GainSkill(int);
-	string GetItemInfo(int);
-	string GetSkillInfo(int);
+	void loadData();
+	void newGame();
+	void loadGame();
+	void saveGame();
+	void showInfo();
+	void gainItem(int);
+	void gainSkill(int);
+	string getItemInfo(int);
+	string getSkillInfo(int);
 };

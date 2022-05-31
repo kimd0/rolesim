@@ -15,9 +15,10 @@ class ItemData
 private:
 	vector<vector<int>> item_;
 	vector<string> item_name_;
-	void ReadFile(string);
+	void readFile(string);
 public:
 	ItemData();
-	void LoadData();
-	string GetName(int);
+	void loadData();
+	void showData();
+	string getName(int);
 };

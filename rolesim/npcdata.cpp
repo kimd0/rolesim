@@ -2,10 +2,10 @@
 
 NpcData::NpcData()
 {
-	LoadData();
+	loadData();
 }
 
-void NpcData::ReadFile(int code)
+void NpcData::readFile(int code)
 {
 	ifstream read_file;
 	string read_line;
@@ -43,7 +43,7 @@ void NpcData::ReadFile(int code)
 	}
 }
 
-void NpcData::LoadData()
+void NpcData::loadData()
 {
 	int npc_number = 0;
 	filesystem::path p("./npc");
@@ -52,10 +52,10 @@ void NpcData::LoadData()
 		npc_number++;
 
 	for (int i =0; i < npc_number; ++i)
-		ReadFile(i);
+		readFile(i);
 }
 
-Npc NpcData::GetRandomNpc()
+Npc NpcData::getRandomNpc()
 {
 	srand((unsigned int)time(NULL));
 	return npcs_[rand() % npcs_.size()];

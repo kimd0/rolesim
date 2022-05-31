@@ -2,10 +2,10 @@
 
 SkillData::SkillData()
 {
-	LoadData();
+	loadData();
 }
 
-void SkillData::ReadFile(string file_name)
+void SkillData::readFile(string file_name)
 {
 	ifstream read_file;
 	string read_line;
@@ -39,9 +39,10 @@ void SkillData::ReadFile(string file_name)
 	}
 }
 
-void SkillData::LoadData()
+void SkillData::loadData()
 {
-	ReadFile("skill\\skill.txt");
+	readFile("skill\\skill.txt");
+	//check integrity by comparing skill code and array index, size check
 	for (int i = 0; i < skill_.size(); i++)
 	{
 		if (skill_[i].size() != 4 || skill_name_[i].empty())
@@ -52,18 +53,16 @@ void SkillData::LoadData()
 			cout << "Wrong skill code : " << skill_[i][0] << "| name : " << skill_name_[i] << endl;
 		}
 	}
-
-	/*
-	//show loaded data
-	cout << "Loaded skill data" << endl;
-	for (int i = 0; i < skill_.size(); i++)
-	{
-		cout << "[" << skill_[i][0] << "] " << skill_name_[i] << " | type : " << skill_[i][1] << " | value : " << skill_[i][2] << skill_[i][1] << " | cost : " << skill_[i][3] << endl;
-	}
-	*/
 }
 
-string SkillData::GetName(int code)
+void SkillData::showData()
+{
+	cout << "Loaded skill data" << endl;
+	for (int i = 0; i < skill_.size(); i++)
+		cout << "[" << skill_[i][0] << "] " << skill_name_[i] << " | type : " << skill_[i][1] << " | value : " << skill_[i][2] << skill_[i][1] << " | cost : " << skill_[i][3] << endl;
+}
+
+string SkillData::getName(int code)
 {
 	string skill_name;
 	skill_name = skill_name_[code];

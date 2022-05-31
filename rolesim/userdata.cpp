@@ -260,12 +260,16 @@ int UserData::useItem(ItemData& item_data, int index)
 
 void UserData::addHealth(int value)
 {
+	cout << "[Info] Health " << health_;
 	health_ += value;
+	cout << " -> " << health_ << endl;
 }
 
 void UserData::addMana(int value)
 {
+	cout << "[Info] Mana " << mana_;
 	mana_ += value;
+	cout << " -> " << mana_ << endl;
 }
 
 void UserData::addMoney(int value)

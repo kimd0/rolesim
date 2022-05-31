@@ -23,6 +23,8 @@ public:
 	void showInventory() const;
 	void gainItem(int) const;
 	void gainSkill(int) const;
+	void changeHealth(int) const;
+	void changeMana(int) const;
 	int useItem(int) const;
 	string getItemInfo(int) const;
 	string getSkillInfo(int) const;

@@ -30,7 +30,7 @@ bool StageManager::newStage()
 		{
 			system("cls");
 
-			if (computeProbability(0)) //for test. should be 70%
+			if (computeProb(70)) //for test. should be 70%
 			{
 				if (monsterStage())
 					break;
@@ -78,12 +78,13 @@ bool StageManager::monsterStage()
 {
 	int input;
 
-	//monster encounter
+	system("cls");
+	cout << "---------------------------------------------" << endl;
+	cout << "A monster appeared from the darkness." << endl;
+	
 	while (true)
 	{
-		system("cls");
-		cout << "---------------------------------------------" << endl;
-		cout << "A monster appeared from the darkness." << endl;
+		cout << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "1) Fight    2) Run" << endl;
 		cout << "---------------------------------------------" << endl;
@@ -97,8 +98,18 @@ bool StageManager::monsterStage()
 		}
 		else if (input == 2)
 		{
-			if (computeProbability(50) == 1)
+			if (computeProb(50))
+			{
+				cout << "[Info] Successfully escaped from the monster." << endl;
 				break;
+			}
+			else
+			{
+				cout << "[Info] Failed to escape from the monster." << endl;
+				//need to add disadvantage
+				play_data_.changeHealth(-100);
+				
+			}
 		}
 		else
 		{
@@ -135,11 +146,12 @@ void StageManager::npcStage()
 	cout << "---------------------------------------------" << endl;
 }
 
-bool computeProbability(int percent)
+
+bool StageManager::computeProb(int percent)
 {
 	random_device rd;
 	mt19937 gen(rd());
-	uniform_int_distribution<> dist(0, 100);
+	uniform_int_distribution<int> dist(0, 99);
 
 	if (dist(gen) < percent)
 		return true;

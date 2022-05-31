@@ -54,6 +54,16 @@ void PlayData::gainSkill(int code) const
 	user_data_->addSkill(code);
 }
 
+void PlayData::changeHealth(int value) const
+{
+	user_data_->addHealth(value);
+}
+
+void PlayData::changeMana(int value) const
+{
+	user_data_->addMana(value);
+}
+
 int PlayData::useItem(int index) const
 {
 	return user_data_->useItem(*item_data_, index);

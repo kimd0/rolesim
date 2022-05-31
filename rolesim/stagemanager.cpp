@@ -4,6 +4,7 @@ StageManager::StageManager(PlayData& play_data)
 {
 	play_data_ = play_data;
 	npc_data_ = new NpcData();
+	monster_data_ = new MonsterData();
 }
 
 StageManager::~StageManager()
@@ -77,9 +78,13 @@ bool StageManager::newStage()
 bool StageManager::monsterStage()
 {
 	int input;
+	Monster new_monster = monster_data_->getRandomMonster();
+	new_monster.setDifficulty(play_data_.getLevelInfo());
 
 	system("cls");
 	cout << "---------------------------------------------" << endl;
+	cout << new_monster.getAppearence() << endl;
+	cout << "[ Lvl. " << new_monster.getLevel() << " ] " << new_monster.getName() << endl;
 	cout << "A monster appeared from the darkness." << endl;
 	
 	while (true)

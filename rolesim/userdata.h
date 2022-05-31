@@ -41,4 +41,5 @@ public:
 	void addHealth(int);
 	void addMana(int);
 	void addMoney(int);
+	int getLevel();
 };

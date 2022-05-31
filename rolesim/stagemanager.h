@@ -1,6 +1,9 @@
 #pragma once
 
 #include <random>
+
+#include "monsterdata.h"
+#include "npcdata.h"
 #include "playdata.h"
 
 using namespace std;
@@ -8,8 +11,8 @@ using namespace std;
 class StageManager
 {
 private:
-	//monster_data_ should be here
 	NpcData *npc_data_;
+	MonsterData* monster_data_;
 	PlayData play_data_;
 	bool monsterStage();
 	void npcStage();

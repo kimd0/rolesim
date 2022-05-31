@@ -1,30 +1,66 @@
 #include "monsterdata.h"
-#include <iostream>
 
-using namespace std;
+MonsterData::MonsterData()
+{
+	loadData();
+}
 
-void Monster::SetInfo(string n, int Level, int HitPoint, int Damage, int Exp, string i)
+void MonsterData::readFile(int code)
 {
-	name = n;
-	level = Level;
-	HP = HitPoint;
-	damage = Damage;
-	exp = Exp;
-	item = i;
+	ifstream read_file;
+
+	read_file.open("monster\\" + to_string(code) + ".txt");
+	if (read_file.is_open())
+	{
+		string read_line;
+		vector<int> new_items;
+		string name;
+		string appearence;
+		int level, health;
+
+		getline(read_file, read_line); //name
+		name = read_line;
+		getline(read_file, read_line); //level
+		level = stoi(read_line);
+		getline(read_file, read_line); //health
+		health = stoi(read_line);
+
+		//monster drop table with '/'
+		getline(read_file, read_line);
+		stringstream item_stream(read_line);
+		string item;
+		while (getline(item_stream, item, '/'))
+			new_items.push_back(stoi(item));
+
+		while (!read_file.eof())
+		{
+			getline(read_file, read_line);
+			appearence += read_line;
+			appearence += "\n";
+		}
+
+		Monster new_monster(name, level, health, new_items, appearence);
+		monsters_.push_back(new_monster);
+	}
 }
-void Monster::ShowInfo()const
+
+void MonsterData::loadData()
 {
-	cout << "Name: " << name << endl;
-	cout << "Level: " << level << endl;
-	cout << "HP: " << HP << endl;
-	cout << "Damage: " << damage << endl;
-	cout << "EXP:" << exp << endl;
-	cout << "Item: " << item << endl;
+	int monster_number = 0;
+	const filesystem::path monster_path("./monster");
+
+	for (auto& i : filesystem::recursive_directory_iterator(monster_path))
+		monster_number++;
+
+	for (int i = 0; i < monster_number; ++i)
+		readFile(i);
 }
-//´ÞÆØÀÌ
-Monster monsterArr[5];
-monsterArr[0].SetInfo = { "Snail", 1, 5, 2, 20, "shell"};
-monsterArr[1].SetInfo = { "Pig", 5, 40, 8, 100, "leather"};
-monsterArr[2].SetInfo = { "Goblin", 10, 100, 30, 250, "sword"};
-monsterArr[3].SetInfo = { "Dragon", 30, 300, 100, 1000, "protectivegear"};
-monsterArr[4].SetInfo = { "Boss", 60, 1000, 400, 10000, "alcohol" };
+
+Monster MonsterData::getRandomMonster()
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<> dist(0, monsters_.size() - 1);
+
+	return monsters_[dist(gen)];
+}

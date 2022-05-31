@@ -276,3 +276,8 @@ void UserData::addMoney(int value)
 {
 	money_ += value;
 }
+
+int UserData::getLevel()
+{
+	return level_;
+}

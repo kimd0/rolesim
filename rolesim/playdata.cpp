@@ -78,3 +78,8 @@ string PlayData::getSkillInfo(int code) const
 {
 	return skill_data_->getName(code);
 }
+
+int PlayData::getLevelInfo() const
+{
+	return user_data_->getLevel();
+}

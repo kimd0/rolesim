@@ -1,7 +1,6 @@
 #pragma once
 
 #include "userdata.h"
-#include "npcdata.h"
 #include "itemdata.h"
 #include "skilldata.h"
 
@@ -28,4 +27,5 @@ public:
 	int useItem(int) const;
 	string getItemInfo(int) const;
 	string getSkillInfo(int) const;
+	int getLevelInfo() const;
 };

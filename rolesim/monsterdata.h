@@ -1,27 +1,21 @@
 #pragma once
-#include <string>
+
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
+#include "monster.h"
 
 using namespace std;
 
-/*이름, 레벨, HP, 데미지, 경험치, 아이템드롭*/
-class Monster 
+class MonsterData
 {
 private:
-	string name;
-	int level;
-	int HP;
-	int damage;
-	int exp;
-	string item;
+	vector<Monster> monsters_;
+	string appearence;
+	void readFile(int);
 public:
-	Monster(string n, int n1, int n2, int n3, int n4, string i)
-		:name(n), level(n1), HP(n2), damage(n3), exp(n4), item(i) {
-	}
-
-	void SetInfo(string n, int Level, int HitPoint, int Damage, int Exp, string i);
-	void ShowInfo()const;
-	~Monster()
-	{
-	
-	}
+	MonsterData();
+	void loadData();
+	Monster getRandomMonster();
 };

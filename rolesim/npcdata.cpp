@@ -61,6 +61,14 @@ void NpcData::LoadData()
 	*/
 }
 
+int NpcData::GetRandomCode()
+{
+	int npc_code;
+	srand((unsigned int)time(NULL));
+	npc_code = rand() % npc_text_.size();
+	return npc_code;
+}
+
 string NpcData::GetName(int code)
 {
 	string npc_name;
@@ -68,10 +76,18 @@ string NpcData::GetName(int code)
 	return npc_name;
 }
 
-string NpcData::GetScript(int code)
+string NpcData::GetRandomScript(int code)
 {
 	string npc_script;
 	srand((unsigned int)time(NULL));
 	npc_script = npc_text_[code][rand()%3 + 1];
 	return npc_script;
+}
+
+int NpcData::GetRandomItem(int code)
+{
+	int npc_item;
+	srand((unsigned int)time(NULL));
+	npc_item = npc_item_[code][rand() % npc_item_[code].size()];
+	return npc_item;
 }

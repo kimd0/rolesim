@@ -1,12 +1,14 @@
 ﻿#include <iostream>
 #include "playdata.h"
+#include "stagemanager.h"
 
 using namespace std;
 
 int main()
 {
     int input;
-    PlayData play_data;
+    PlayData *play_data = new PlayData();
+    StageManager *stage_manager = new StageManager(*play_data);
 
     cout << "---------------------------------------------" << endl;
     cout << "\tRole playing game simulator\t" << endl;
@@ -19,12 +21,12 @@ int main()
         cin >> input;
         if (input == 1)
         {
-            play_data.NewGame();
+            play_data->NewGame();
             break;
         }
         else if (input == 2)
         {
-            play_data.LoadGame();
+            play_data->LoadGame();
             break;
         }
         else
@@ -33,15 +35,22 @@ int main()
             fflush(stdin);
         }
     }
-    play_data.ShowInfo();
+    play_data->ShowInfo();
 
     //actual game play (combat)
+    cout << "[Info] You have entered the dungeon." << endl;
     while (true)
     {
-
+        if (!stage_manager->NewStage())
+            break;
     }
 
-    play_data.SaveGame();
+    cout << "[Info] Your adventure is over." << endl;
+    play_data->SaveGame();
+
+
+    delete play_data;
+    delete stage_manager;
 
     return 0;
 }

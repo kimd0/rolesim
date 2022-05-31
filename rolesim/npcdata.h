@@ -21,6 +21,8 @@ private:
 public:
 	NpcData();
 	void LoadData();
+	int GetRandomCode();
 	string GetName(int);
-	string GetScript(int);
+	string GetRandomScript(int);
+	int GetRandomItem(int);
 };

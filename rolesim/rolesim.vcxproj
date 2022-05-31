@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="stagemanager.cpp" />
     <ClCompile Include="itemdata.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="npcdata.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="skilldata.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="stagemanager.h" />
     <ClInclude Include="itemdata.h" />
     <ClInclude Include="npcdata.h" />
     <ClInclude Include="playdata.h" />

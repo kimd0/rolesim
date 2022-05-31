@@ -11,7 +11,6 @@ private:
 	UserData *user_data_;
 	ItemData *item_data_;
 	SkillData *skill_data_;
-	NpcData *npc_data_;
 
 public:
 	PlayData();
@@ -21,4 +20,8 @@ public:
 	void LoadGame();
 	void SaveGame();
 	void ShowInfo();
+	void GainItem(int);
+	void GainSkill(int);
+	string GetItemInfo(int);
+	string GetSkilInfo(int);
 };

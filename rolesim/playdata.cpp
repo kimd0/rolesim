@@ -10,7 +10,6 @@ PlayData::~PlayData()
 	delete user_data_;
 	delete item_data_;
 	delete skill_data_;
-	delete npc_data_;
 }
 
 void PlayData::LoadData()
@@ -18,7 +17,6 @@ void PlayData::LoadData()
 	user_data_ = new UserData();
 	item_data_ = new ItemData();
 	skill_data_ = new SkillData();
-	npc_data_ = new NpcData();
 }
 
 void PlayData::NewGame()
@@ -39,4 +37,24 @@ void PlayData::SaveGame()
 void PlayData::ShowInfo()
 {
 	user_data_->ShowData(*skill_data_, *item_data_);
+}
+
+void PlayData::GainItem(int code)
+{
+	user_data_->AddItem(code);
+}
+
+void PlayData::GainSkill(int code)
+{
+	user_data_->AddSkill(code);
+}
+
+string PlayData::GetItemInfo(int code)
+{
+	return item_data_->GetName(code);
+}
+
+string PlayData::GetSkilInfo(int code)
+{
+	return skill_data_->GetName(code);
 }

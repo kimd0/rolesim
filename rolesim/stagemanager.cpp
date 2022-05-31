@@ -20,12 +20,14 @@ bool StageManager::newStage()
 		cout << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "[Info] An endless dungeon unfolds before your eyes." << endl;
-		cout << "1) Go    2) Stop    3) Status" << endl;
+		cout << "1) Move forward\t\t2) Inventory" << endl;
+		cout << "3) Status\t\t4) Exit" << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "Input: ";
 		cin >> input;
 		if (input == 1)
 		{
+			system("cls");
 			random_device rd;
 			mt19937 gen(rd());
 			uniform_int_distribution<> dist(0, 99);
@@ -45,12 +47,25 @@ bool StageManager::newStage()
 		}
 		else if (input == 2)
 		{
-			return false;
+			system("cls");
+			//item show / use
+			play_data_.showInventory();
+			cout << "[Tip] Input -1 to Cancel." << endl;
+			cout << "---------------------------------------------" << endl;
+			cout << "Select item : ";
+			cin >> input;
+			if (input != -1)
+				play_data_.useItem(input);
 		}
 		else if (input == 3)
 		{
 			system("cls");
 			play_data_.showInfo();
+		}
+		else if (input == 4)
+		{
+			system("cls");
+			return false;
 		}
 		else
 		{
@@ -67,7 +82,7 @@ bool StageManager::monsterStage()
 
 	//monster encounter
 	system("cls");
-	cout << "1) Fight\t2) Run" << endl;
+	cout << "1) Fight    2) Run" << endl;
 	cin >> input;
 
 	//player win -> return true, lose -> return false.
@@ -80,7 +95,6 @@ void StageManager::npcStage()
 	vector<int> npc_reward = new_npc.getReward();
 
 	//npc encounter
-	system("cls");
 	cout << "---------------------------------------------" << endl;
 	cout << "[Info] A voice comes from somewhere..." << endl;
 	cout << "[Info] " << new_npc.getName() << " : " << new_npc.getScript() << endl;

@@ -30,9 +30,15 @@ public:
 	void newData();
 	void loadData();
 	void saveData() const;
+	void showData(ItemData&) const;
+	void showData(SkillData&) const;
 	void showData(SkillData&, ItemData&) const;
 	void removeData();
 	void addSkill(int);
 	void addItem(int);
+	int useItem(ItemData&, int);
+	void useSkill(SkillData&, int);
+	void addHealth(int);
+	void addMana(int);
 	void addMoney(int);
 };

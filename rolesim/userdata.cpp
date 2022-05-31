@@ -166,6 +166,27 @@ void UserData::removeData()
 
 }
 
+void UserData::showData(ItemData& itemdata) const
+{
+	cout << "---------------------------------------------" << endl;
+	cout << "\t[Inventory]" << endl;
+	cout << "---------------------------------------------" << endl;
+	for (vector<int>::size_type i = 0; i < item_.size(); i++)
+		cout << "[ " << i << " ] " << itemdata.getName(i) << endl;
+	cout << "---------------------------------------------" << endl;
+}
+
+void UserData::showData(SkillData& skilldata) const
+{
+
+	cout << "---------------------------------------------" << endl;
+	cout << "\t[Skills]" << endl;
+	cout << "---------------------------------------------" << endl;
+	for (int i : skill_)
+		cout << "[ " << i << " ] " << skilldata.getName(i) << endl;
+	cout << "---------------------------------------------" << endl;
+}
+
 void UserData::showData(SkillData &skilldata, ItemData &itemdata) const
 {
 	cout << "\n---------------------------------------------" << endl;
@@ -205,6 +226,46 @@ void UserData::addItem(int code)
 {
 	item_.push_back(code);
 	sort(item_.begin(), item_.end());
+}
+
+int UserData::useItem(ItemData& item_data, int index)
+{
+	if (item_.size() <= index)
+	{
+		cout << "[Info] Can't use that item. (Out of range)" << endl;
+		return 0;
+	}
+
+	vector<int> item_effect = item_data.getEffect(item_[index]);
+	item_.erase(item_.begin() + index);
+
+	if(item_effect[1] == 0)//health
+	{
+		cout << "[Info] Recovered health +" << item_effect[2] << endl;
+		addHealth(item_effect[2]);
+		return 0;
+	}
+	else if (item_effect[1] == 1)//mana
+	{
+		cout << "[Info] Recovered Mana +" << item_effect[2] << endl;
+		addMana(item_effect[2]);
+		return 0;
+	}
+	else//granade.
+	{
+		cout << "BOOM!" << endl;
+		return item_effect[2];
+	}
+}
+
+void UserData::addHealth(int value)
+{
+	health_ += value;
+}
+
+void UserData::addMana(int value)
+{
+	mana_ += value;
 }
 
 void UserData::addMoney(int value)

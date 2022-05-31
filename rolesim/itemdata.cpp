@@ -62,3 +62,10 @@ string ItemData::getName(int code) const
 {
 	return item_name_[code];
 }
+
+vector<int> ItemData::getEffect(int code) const
+{
+	// return [code, type, value]
+	// type 0 : health, 1: mana, 2: attack
+	return item_[code];
+}

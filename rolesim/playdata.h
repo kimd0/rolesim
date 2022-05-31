@@ -20,8 +20,10 @@ public:
 	void loadGame() const;
 	void saveGame() const;
 	void showInfo() const;
+	void showInventory() const;
 	void gainItem(int) const;
 	void gainSkill(int) const;
+	int useItem(int) const;
 	string getItemInfo(int) const;
 	string getSkillInfo(int) const;
 };

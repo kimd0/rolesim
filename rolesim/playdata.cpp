@@ -39,6 +39,11 @@ void PlayData::showInfo() const
 	user_data_->showData(*skill_data_, *item_data_);
 }
 
+void PlayData::showInventory() const
+{
+	user_data_->showData(*item_data_);
+}
+
 void PlayData::gainItem(int code) const
 {
 	user_data_->addItem(code);
@@ -47,6 +52,11 @@ void PlayData::gainItem(int code) const
 void PlayData::gainSkill(int code) const
 {
 	user_data_->addSkill(code);
+}
+
+int PlayData::useItem(int index) const
+{
+	return user_data_->useItem(*item_data_, index);
 }
 
 string PlayData::getItemInfo(int code) const

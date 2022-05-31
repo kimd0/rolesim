@@ -1,11 +1,11 @@
 #include "npc.h"
 
-Npc::Npc(string name, vector<string> scripts, vector<int> items, vector<int> skills)
+Npc::Npc(string name, vector<string> scripts, vector<int> skills, vector<int> items)
 {
 	name_ = move(name);
 	scripts_ = move(scripts);
-	items_ = move(items);
 	skills_ = move(skills);
+	items_ = move(items);
 }
 
 string Npc::getName() const

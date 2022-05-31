@@ -214,7 +214,7 @@ void UserData::showData(SkillData& skilldata) const
 			cout << "Earth";
 		else if (new_skill[1] == 4)
 			cout << "Wind";
-		cout << " | Damage : " << new_skill[2] * level_ * 10 << " | Cost : " << new_skill[3] << endl;
+		cout << " | Damage : " << new_skill[2] * level_ * 50 << " | Cost : " << new_skill[3] << endl;
 	}
 	cout << "---------------------------------------------" << endl;
 }
@@ -225,9 +225,8 @@ void UserData::showData(SkillData &skilldata, ItemData &itemdata) const
 	cout << "\t[Character Status]" << endl;
 	cout << "---------------------------------------------" << endl;
 	cout << "[LV." << level_ << " (" << experience_ << " / 100) ] " << name_ << endl;
-	cout << "Health : " << health_ << endl;
-	cout << "Mana : " << mana_ << endl;
-	cout << "Money : " << money_ << endl;
+	showCondition();
+	cout << "[Money] " << money_ << endl;
 	cout << "---------------------------------------------" << endl;
 	showData(skilldata);
 	showData(itemdata);
@@ -297,7 +296,7 @@ int UserData::useSkill(SkillData& skill_data, int index)
 	{
 		cout << "[Info] Skill - [" << skill_data.getName(skill_effect[0]) << "]" << endl;
 		addMana(-skill_effect[3]);
-		return level_ * skill_effect[2] * 10;
+		return level_ * skill_effect[2] * 50;
 	}
 	else
 	{
@@ -326,8 +325,8 @@ void UserData::levelUp()
 	level_ += 1;
 	cout << " -> LV." << level_ << endl;
 	cout << "[Info] Health " << health_ << " Mana " << mana_;
-	health_ += level_ * 2;
-	mana_ += level_;
+	health_ += level_ * 10;
+	mana_ += level_ * 5;
 	cout << " -> Health " << health_ << " Mana " << mana_ << endl;
 }
 
@@ -367,6 +366,6 @@ int UserData::getLevel()
 
 void UserData::showCondition() const
 {
-	cout << "[Health] " << current_health_ << "/" << health_;
-	cout << " [Mana] " << current_mana_ << "/" << mana_ << endl;
+	cout << "[Health] " << current_health_ << "/" << health_ << endl;
+	cout << "[Mana] " << current_mana_ << "/" << mana_ << endl;
 }

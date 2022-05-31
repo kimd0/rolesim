@@ -26,13 +26,12 @@ bool StageManager::newStage()
 		cout << "3) Status\t\t4) Exit" << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "Input: ";
-		fflush(stdin);
 		cin >> input;
 		if (input == 1)
 		{
 			system("cls");
 
-			if (computeProb(0)) //for test. should be 70%
+			if (computeProb(70)) //for test. should be 70%
 			{
 				if (monsterStage())
 					break;
@@ -71,6 +70,7 @@ bool StageManager::newStage()
 		else
 		{
 			cout << "[Info] Please enter valid input." << endl;
+			fflush(stdin);
 		}
 	}
 	return true;
@@ -97,7 +97,6 @@ bool StageManager::monsterStage()
 		cout << "1) Fight    2) Run" << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "Input : ";
-		fflush(stdin);
 		cin >> input;
 
 		if (input == 1)
@@ -126,6 +125,7 @@ bool StageManager::monsterStage()
 		else
 		{
 			cout << "[Info] Please enter valid input." << endl;
+			fflush(stdin);
 		}
 	}
 	system("cls");
@@ -136,7 +136,8 @@ bool StageManager::monsterStage()
 		cout << "[ Lvl. " << new_monster.getLevel() << " ] " << new_monster.getName() << endl;
 		cout << "Health : " << new_monster.getHealth() << " / " << max_health << endl;
 		cout << "---------------------------------------------" << endl;
-		cout << "You :";
+		cout << "---------------------------------------------" << endl;
+		cout << "[Player]";
 		play_data_->showCondition();
 		cout << "---------------------------------------------" << endl;
 		cout << "1) Use Skill\t2) Use Item" << endl;
@@ -165,9 +166,10 @@ bool StageManager::monsterStage()
 		{
 			vector<int> reward = new_monster.getReward();
 			cout << "[Info] You win!" << endl;
+			cout << "[Info] You gained " << reward[0] << " Gold and " << play_data_->getItemInfo(reward[1]) << endl;
 			play_data_->gainMoney(reward[0]);
 			play_data_->gainItem(reward[1]);
-			play_data_->gainExperience(10.0 * new_monster.getLevel() / play_data_->getLevelInfo());
+			play_data_->gainExperience(round(50.0 * new_monster.getLevel() / play_data_->getLevelInfo()));
 			break;
 		}
 

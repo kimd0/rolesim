@@ -47,7 +47,7 @@ vector<int> Monster::getReward()
 
 int Monster::actionAtk()
 {
-	return -level_;
+	return -level_*10;
 }
 
 void Monster::actionDef(int value)

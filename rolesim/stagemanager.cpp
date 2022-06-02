@@ -137,7 +137,7 @@ bool StageManager::monsterStage()
 		cout << "Health : " << new_monster.getHealth() << " / " << max_health << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "---------------------------------------------" << endl;
-		cout << "[Player]";
+		cout << "[Player]" << endl;
 		play_data_->showCondition();
 		cout << "---------------------------------------------" << endl;
 		cout << "1) Use Skill\t2) Use Item" << endl;

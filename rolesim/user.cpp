@@ -2,10 +2,10 @@
 
 User::User()
 {
-	User("", 1, 0, 100, 50, 0, { 0 }, { 0 });
+	User("", 1, 0, 100, 50, 0, {0}, {0});
 }
 
-User::User(string name, int level, int health, int mana, int experience, int money, vector<int> skill, vector<int> item)
+User::User(string name, int level, int experience, int health, int mana, int money, vector<int> skill, vector<int> item)
 {
 	name_ = move(name);
 	level_ = level;
@@ -159,8 +159,8 @@ int User::addExperience(int value)
 	
 	if (experience_ >= 100)
 	{
-		experience_ %= 100;
-		cout << "100% + " << experience_ << "%" << endl;
+		experience_ = 0;
+		cout << "100%" << endl;
 		levelUp();
 	}
 	else
@@ -176,10 +176,10 @@ void User::levelUp()
 	cout << "[Info] LV." << level_;
 	level_ += 1;
 	cout << " -> LV." << level_ << endl;
-	cout << "[Info] Health " << health_ << " Mana " << mana_;
+	cout << "[Info] Health " << health_ << " / Mana " << mana_;
 	health_ += level_ * 10;
 	mana_ += level_ * 5;
-	cout << " -> Health " << health_ << " Mana " << mana_ << endl;
+	cout << " -> Health " << health_ << " / Mana " << mana_ << endl;
 }
 
 int User::addHealth(int value)

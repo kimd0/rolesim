@@ -53,8 +53,8 @@ User UserData::readFile(string name)
 		return User(name, level, exp, health, mana, money, skill, item);
 	}
 
-	cout << "[Error] Can't open save file. Loaded basic data." << endl;
-	return User();
+	cout << "[Error] Can't open save file. Loaded basic data instead." << endl;
+	return User(name, 1, 0, 100, 50, 0, { 0 }, { 0 });
 }
 
 void UserData::writeFile(User &user) const
@@ -154,7 +154,7 @@ User UserData::newData()
 		else
 			break;
 	}
-	User user;
+	User user(user_name, 1, 0, 100, 50, 0, { 0 }, { 0 });
 	saveData(user);
 
 	return user;

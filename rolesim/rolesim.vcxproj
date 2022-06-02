@@ -148,6 +148,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="npcdata.cpp" />
     <ClCompile Include="playdata.cpp" />
+    <ClCompile Include="user.cpp" />
     <ClCompile Include="userdata.cpp" />
     <ClCompile Include="skilldata.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="itemdata.h" />
     <ClInclude Include="npcdata.h" />
     <ClInclude Include="playdata.h" />
+    <ClInclude Include="user.h" />
     <ClInclude Include="userdata.h" />
     <ClInclude Include="skilldata.h" />
   </ItemGroup>

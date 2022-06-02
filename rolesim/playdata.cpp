@@ -20,92 +20,92 @@ void PlayData::loadData()
 	skill_data_ = new SkillData();
 }
 
-void PlayData::newGame() const
+void PlayData::newGame()
 {
-	user_data_->newData();
+	user_ = user_data_->newData();
 }
 
-void PlayData::loadGame() const
+void PlayData::loadGame()
 {
-	user_data_->loadData();
+	user_ = user_data_->loadData();
 }
 
-void PlayData::saveGame() const
+void PlayData::saveGame()
 {
-	user_data_->saveData();
+	user_data_->saveData(user_);
 }
 
-void PlayData::showInfo() const
+void PlayData::showInfo()
 {
-	user_data_->showData(*skill_data_, *item_data_);
+	user_.showStatus(*skill_data_, *item_data_);
 }
 
-void PlayData::showInventory() const
+void PlayData::showInventory()
 {
-	user_data_->showData(*item_data_);
+	user_.showItem(*item_data_);
 }
 
-void PlayData::showSkill() const
+void PlayData::showSkill()
 {
-	user_data_->showData(*skill_data_);
+	user_.showSkill(*skill_data_);
 }
 
-void PlayData::showCondition() const
+void PlayData::showCondition()
 {
-	user_data_->showCondition();
+	user_.showCondition();
 }
 
-void PlayData::gainItem(int code) const
+void PlayData::gainItem(int code)
 {
-	user_data_->addItem(code);
+	user_.addItem(code);
 }
 
-void PlayData::gainSkill(int code) const
+void PlayData::gainSkill(int code)
 {
-	user_data_->addSkill(code);
+	user_.addSkill(code);
 }
 
-void PlayData::gainExperience(int value) const
+void PlayData::gainExperience(int value)
 {
-	user_data_->addExperience(value);
+	user_.addExperience(value);
 }
 
-void PlayData::gainMoney(int value) const
+void PlayData::gainMoney(int value)
 {
-	user_data_->addMoney(value);
+	user_.addMoney(value);
 }
 
-int PlayData::changeHealth(int value) const
+int PlayData::changeHealth(int value)
 {
-	return user_data_->addHealth(value);
+	return user_.addHealth(value);
 }
 
-int PlayData::changeMana(int value) const
+int PlayData::changeMana(int value)
 {
-	return user_data_->addMana(value);
+	return user_.addMana(value);
 }
 
-int PlayData::useItem(int index) const
+int PlayData::useItem(int index)
 {
-	return user_data_->useItem(*item_data_, index);
+	return user_.useItem(*item_data_, index);
 }
 
-int PlayData::useSkill(int index) const
+int PlayData::useSkill(int index)
 {
-	return user_data_->useSkill(*skill_data_, index);
+	return user_.useSkill(*skill_data_, index);
 }
 
-string PlayData::getItemInfo(int code) const
+string PlayData::getItemInfo(int code)
 {
 	return item_data_->getName(code);
 }
 
-string PlayData::getSkillInfo(int code) const
+string PlayData::getSkillInfo(int code)
 {
 	return skill_data_->getName(code);
 }
 
-int PlayData::getLevelInfo() const
+int PlayData::getLevelInfo()
 {
-	return user_data_->getLevel();
+	return user_.getLevel();
 }

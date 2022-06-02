@@ -1,6 +1,6 @@
 #include "stagemanager.h"
 
-StageManager::StageManager(const PlayData& play_data)
+StageManager::StageManager(PlayData& play_data)
 {
 	play_data_ = &play_data;
 	npc_data_ = new NpcData();

@@ -52,7 +52,7 @@ void NpcData::loadData()
 	int npc_number = 0;
 	const filesystem::path npc_path("./npc");
 
-	for (auto& i : filesystem::recursive_directory_iterator(npc_path))
+	for (filesystem::recursive_directory_iterator next(npc_path), end; next != end; ++next)
 		npc_number++;
 
 	for (int i =0; i < npc_number; ++i)

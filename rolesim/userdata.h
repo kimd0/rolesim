@@ -3,8 +3,6 @@
 #include <string>
 #include <vector>
 #include <filesystem>
-#include "itemdata.h"
-#include "skilldata.h"
 #include "user.h"
 
 using namespace std;
@@ -13,15 +11,15 @@ class UserData
 {
 private:
 	vector<string> user_list_;
-	User readFile(string);
-	void writeFile(User &) const;
+	User readFile(const string&);
+	void writeFile(const User&);
 	void getUserList();
 	string selectData();
-	bool checkData(string) const;
-	bool checkUser(string);
+	bool checkData(const string&) const;
+	bool checkUser(const string&) const;
 public:
 	UserData();
 	User newData();
 	User loadData();
-	void saveData(User &);
+	void saveData(const User &);
 };

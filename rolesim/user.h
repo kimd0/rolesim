@@ -11,11 +11,11 @@ class User
 private:
 	string name_;
 	int level_;
+	int experience_;
 	int health_;
 	int current_health_;
 	int mana_;
 	int current_mana_;
-	int experience_;
 	int money_;
 	vector<int> skill_;
 	vector<int> item_;
@@ -35,14 +35,12 @@ public:
 	int addMana(int);
 	void addMoney(int);
 	void levelUp();
-
-	string getName();
-	int getLevel();
-	int getExperience();
-	int getHealth();
-	int getMana();
-	int getMoney();
-	vector<int> getSkill();
-	vector<int> getItem();
+	string getName() const;
+	int getLevel() const;
+	int getExperience() const;
+	int getHealth() const;
+	int getMana() const;
+	int getMoney() const;
+	vector<int> getSkill() const;
+	vector<int> getItem() const;
 };
-

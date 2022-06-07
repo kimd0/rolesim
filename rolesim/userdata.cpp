@@ -5,9 +5,9 @@ UserData::UserData()
 	getUserList();
 }
 
-User UserData::readFile(string name)
+User UserData::readFile(const string& user_name)
 {
-	string file_name = "user\\" + name + ".txt";
+	string file_name = "user\\" + user_name + ".txt";
 	ifstream read_file;
 	read_file.open(file_name);
 	if (read_file.is_open())
@@ -54,10 +54,10 @@ User UserData::readFile(string name)
 	}
 
 	cout << "[Error] Can't open save file. Loaded basic data instead." << endl;
-	return User(name, 1, 0, 100, 50, 0, { 0 }, { 0 });
+	return User(user_name, 1, 0, 100, 50, 0, { 0 }, { 0 });
 }
 
-void UserData::writeFile(User &user) const
+void UserData::writeFile(const User &user)
 {
 	cout << "[Info] Writing save file..." << endl;
 	string file_name = "user\\" + user.getName() + ".txt";
@@ -89,9 +89,9 @@ void UserData::writeFile(User &user) const
 void UserData::getUserList()
 {
 	const filesystem::path user_path("./user");
-	for (auto& i : filesystem::recursive_directory_iterator(user_path))
+	for (filesystem::recursive_directory_iterator next(user_path), end; next != end; ++next)
 	{
-		string user = i.path().filename().string();
+		string user = next->path().filename().string();
 		user = user.substr(0, user.length() - 4);
 		user_list_.push_back(user);
 	}
@@ -109,9 +109,16 @@ string UserData::selectData()
 
 	while (true)
 	{
-		fflush(stdin);
 		cout << "Input user name :";
 		cin >> user_name;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "[Info] Please enter valid input." << endl;
+			continue;
+		}
 
 		if (checkUser(user_name))
 		{
@@ -123,7 +130,7 @@ string UserData::selectData()
 	}
 }
 
-bool UserData::checkData(string user) const
+bool UserData::checkData(const string& user) const
 {
 	const filesystem::path user_data("./user/" + user + ".txt");
 	if (filesystem::exists(user_data))
@@ -132,7 +139,7 @@ bool UserData::checkData(string user) const
 		return false;
 }
 
-bool UserData::checkUser(string user)
+bool UserData::checkUser(const string& user) const
 {
 	if (find(user_list_.begin(), user_list_.end(), user) != user_list_.end())
 		return true;
@@ -145,9 +152,16 @@ User UserData::newData()
 	string user_name;
 	while (true)
 	{
-		fflush(stdin);
 		cout << "Please input your name : ";
 		cin >> user_name;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "[Info] Please enter valid input." << endl;
+			continue;
+		}
 
 		if (checkUser(user_name))
 			cout << "[Error] User name already exists." << endl;
@@ -165,7 +179,7 @@ User UserData::loadData()
 	return readFile(selectData());
 }
 
-void UserData::saveData(User &user)
+void UserData::saveData(const User &user)
 {
 	cout << "[Info] Saving data..." << endl;
 	writeFile(user);

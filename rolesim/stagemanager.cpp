@@ -27,6 +27,15 @@ bool StageManager::newStage()
 		cout << "---------------------------------------------" << endl;
 		cout << "Input: ";
 		cin >> input;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "[Info] Please enter valid input." << endl;
+			continue;
+		}
+
 		if (input == 1)
 		{
 			system("cls");
@@ -52,8 +61,15 @@ bool StageManager::newStage()
 			cout << "[Tip] Input -1 to Cancel." << endl;
 			cout << "---------------------------------------------" << endl;
 			cout << "Select item : ";
-			fflush(stdin);
 			cin >> input;
+
+			if (cin.fail())
+			{
+				cin.clear();
+				cin.ignore(256, '\n');
+				cout << "[Info] Please enter valid input." << endl;
+				continue;
+			}
 			if (input != -1)
 				play_data_->useItem(input);
 		}
@@ -70,7 +86,6 @@ bool StageManager::newStage()
 		else
 		{
 			cout << "[Info] Please enter valid input." << endl;
-			fflush(stdin);
 		}
 	}
 	return true;
@@ -94,10 +109,18 @@ bool StageManager::monsterStage()
 	{
 		cout << endl;
 		cout << "---------------------------------------------" << endl;
-		cout << "1) Fight    2) Run" << endl;
+		cout << "1) Fight\t2) Run" << endl;
 		cout << "---------------------------------------------" << endl;
 		cout << "Input : ";
 		cin >> input;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "[Info] Please enter valid input." << endl;
+			continue;
+		}
 
 		if (input == 1)
 		{
@@ -125,7 +148,6 @@ bool StageManager::monsterStage()
 		else
 		{
 			cout << "[Info] Please enter valid input." << endl;
-			fflush(stdin);
 		}
 	}
 	system("cls");
@@ -143,6 +165,15 @@ bool StageManager::monsterStage()
 		cout << "1) Use Skill\t2) Use Item" << endl;
 		cout << "Select Input : ";
 		cin >> input;
+
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+			cout << "[Info] Please enter valid input." << endl;
+			continue;
+		}
+
 		if (input == 1)
 		{
 			play_data_->showSkill();
@@ -169,7 +200,7 @@ bool StageManager::monsterStage()
 			cout << "[Info] You gained " << reward[0] << " Gold and " << play_data_->getItemInfo(reward[1]) << endl;
 			play_data_->gainMoney(reward[0]);
 			play_data_->gainItem(reward[1]);
-			play_data_->gainExperience(round(50.0 * new_monster.getLevel() / play_data_->getLevelInfo()));
+			play_data_->gainExperience((int)round(50.0 * new_monster.getLevel() / play_data_->getLevelInfo()));
 			break;
 		}
 

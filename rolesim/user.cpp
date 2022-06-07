@@ -2,18 +2,18 @@
 
 User::User()
 {
-	User("", 1, 0, 100, 50, 0, {0}, {0});
+
 }
 
 User::User(string name, int level, int experience, int health, int mana, int money, vector<int> skill, vector<int> item)
 {
 	name_ = move(name);
 	level_ = level;
+	experience_ = experience;
 	health_ = health;
 	current_health_ = health_;
 	mana_ = mana;
 	current_mana_ = mana_;
-	experience_ = experience;
 	money_ = money;
 	skill_ = move(skill);
 	item_ = move(item);
@@ -206,47 +206,47 @@ int User::addMana(int value)
 	return current_mana_;
 }
 
-void User::addMoney(int value)
+void User::addMoney(const int value)
 {
 	money_ += value;
 }
 
-string User::getName()
+string User::getName() const
 {
 	return name_;
 }
 
-int User::getLevel()
+int User::getLevel() const
 {
 	return level_;
 }
 
-int User::getExperience()
+int User::getExperience() const
 {
 	return experience_;
 }
 
-int User::getHealth()
+int User::getHealth() const
 {
 	return health_;
 }
 
-int User::getMana()
+int User::getMana() const
 {
 	return mana_;
 }
 
-int User::getMoney()
+int User::getMoney() const
 {
 	return money_;
 }
 
-vector<int> User::getSkill()
+vector<int> User::getSkill() const
 {
 	return skill_;
 }
 
-vector<int> User::getItem()
+vector<int> User::getItem() const
 {
 	return item_;
 }

@@ -1,14 +1,10 @@
 #pragma once
 
-#include <string>
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <filesystem>
+#include "gamedata.h"
 
 using namespace std;
 
-class SkillData
+class SkillData : public GameData
 {
 private:
 	vector<vector<int>> skill_;

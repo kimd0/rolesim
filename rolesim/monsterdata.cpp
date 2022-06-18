@@ -57,6 +57,13 @@ void MonsterData::loadData()
 		readFile(i);
 }
 
+void MonsterData::showData() const
+{
+	cout << "Total " << monsters_.size() << " monsters loaded." << endl;
+	for (vector<int>::size_type i = 0; i < monsters_.size(); i++)
+		cout << "[" << i << "] " << monsters_[i].getName() << " | level : " << monsters_[i].getLevel() << " | health : " << monsters_[i].getHealth() << endl << "appearence : " << endl << monsters_[i].getAppearence() << endl;
+}
+
 Monster MonsterData::getRandomMonster()
 {
 	random_device rd;

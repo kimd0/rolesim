@@ -153,6 +153,7 @@
     <ClCompile Include="skilldata.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gamedata.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="monsterdata.h" />
     <ClInclude Include="npc.h" />

@@ -17,10 +17,10 @@ private:
 	string appearence_;
 public:
 	Monster(string, int, int, vector<int>, string);
-	string getName();
-	int getLevel();
-	int getHealth();
-	string getAppearence();
+	string getName() const;
+	int getLevel() const;
+	int getHealth() const;
+	string getAppearence() const;
 	void setDifficulty(int);
 	int actionAtk();
 	void actionDef(int);

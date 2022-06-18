@@ -1,14 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <filesystem>
+#include "gamedata.h"
 #include "npc.h"
 
 using namespace std;
 
-class NpcData
+class NpcData : public GameData
 {
 private:
 	vector<Npc> npcs_;
@@ -16,5 +13,6 @@ private:
 public:
 	NpcData();
 	void loadData();
+	void showData() const;
 	Npc getRandomNpc();
 };

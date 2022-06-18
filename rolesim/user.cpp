@@ -100,7 +100,7 @@ void User::addItem(int code)
 
 int User::useItem(ItemData& item_data, int index)
 {
-	if (item_.size() <= index)
+	if (static_cast<int>(item_.size()) <= index)
 	{
 		cout << "[Info] Can't use that item. (Out of range)" << endl;
 		return 0;
@@ -131,7 +131,7 @@ int User::useItem(ItemData& item_data, int index)
 
 int User::useSkill(SkillData& skill_data, int index)
 {
-	if (skill_.size() <= index)
+	if (static_cast<int>(skill_.size()) <= index)
 	{
 		cout << "[Info] Can't use that skill. (Out of range)" << endl;
 		return 0;

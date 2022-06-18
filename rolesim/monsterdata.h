@@ -1,14 +1,11 @@
 #pragma once
 
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <filesystem>
+#include "gamedata.h"
 #include "monster.h"
 
 using namespace std;
 
-class MonsterData
+class MonsterData : public GameData
 {
 private:
 	vector<Monster> monsters_;
@@ -17,5 +14,6 @@ private:
 public:
 	MonsterData();
 	void loadData();
+	void showData() const;
 	Monster getRandomMonster();
 };

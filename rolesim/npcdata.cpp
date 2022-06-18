@@ -59,6 +59,13 @@ void NpcData::loadData()
 		readFile(i);
 }
 
+void NpcData::showData() const
+{
+	cout << "Total " << npcs_.size() << " npcs loaded." << endl;
+	for (vector<int>::size_type i = 0; i < npcs_.size(); i++)
+		cout << "[" << i << "] " << npcs_[i].getName() << " | level : " << npcs_[i].getScript() << endl;
+}
+
 Npc NpcData::getRandomNpc()
 {
 	random_device rd;

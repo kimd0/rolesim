@@ -9,22 +9,22 @@ Monster::Monster(string name, int level, int health, vector<int> item, string ap
 	appearence_ = move(appearence);
 }
 
-string Monster::getName()
+string Monster::getName() const
 {
 	return name_;
 }
 
-int Monster::getLevel()
+int Monster::getLevel() const
 {
 	return level_;
 }
 
-int Monster::getHealth()
+int Monster::getHealth() const
 {
 	return health_;
 }
 
-string Monster::getAppearence()
+string Monster::getAppearence() const
 {
 	return appearence_;
 }
@@ -32,7 +32,7 @@ string Monster::getAppearence()
 void Monster::setDifficulty(int player_level)
 {
 	double new_level = (100.0 + level_) / 100 * player_level;
-	level_ = round(new_level);
+	level_ = static_cast<int>(round(new_level));
 	health_ += level_ * 50;
 }
 

@@ -9,6 +9,7 @@
 class GameData
 {
 public:
+	virtual ~GameData();
 	virtual void loadData() = 0;
 	virtual void showData() const = 0;
 };

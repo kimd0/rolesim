@@ -34,7 +34,7 @@ void DataManager::loadGame()
 	user_ = user_data_->loadData();
 }
 
-void DataManager::saveGame()
+void DataManager::saveGame() const
 {
 	user_data_->saveData(user_);
 }

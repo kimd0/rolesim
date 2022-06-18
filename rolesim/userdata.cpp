@@ -103,6 +103,7 @@ string UserData::selectData()
 	cout << "-----------------------------" << endl;
 	cout << "Saved Data" << endl;
 	cout << "-----------------------------" << endl;
+	getUserList();
 	for (auto& i : user_list_)
 		cout << i << endl;
 	cout << "-----------------------------" << endl;

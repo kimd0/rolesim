@@ -30,8 +30,8 @@ public:
 	void showStatus(const SkillData&, const ItemData&) const;
 	void addSkill(int);
 	void addItem(int);
-	int useItem(ItemData&, int);
-	int useSkill(SkillData&, int);
+	int useItem(const ItemData&, int);
+	int useSkill(const SkillData&, int);
 	int addExperience(int);
 	int addHealth(int);
 	int addMana(int);

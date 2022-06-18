@@ -12,7 +12,7 @@ private:
 	DataManager *play_data_;
 	bool monsterStage();
 	void npcStage();
-	int randomNumber(int = 0, int = 99);
+	static int randomNumber(int = 0, int = 99);
 public:
 	StageManager(DataManager&);
 	bool newStage();

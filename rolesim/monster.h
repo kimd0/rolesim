@@ -26,4 +26,3 @@ public:
 	void actionDef(int);
 	vector<int> getReward();
 };
-

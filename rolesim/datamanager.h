@@ -23,7 +23,7 @@ public:
 	void loadData();
 	void newGame();
 	void loadGame();
-	void saveGame();
+	void saveGame() const;
 	void showData() const;
 	void showInfo() const;
 	void showInventory() const;

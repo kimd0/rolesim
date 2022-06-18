@@ -13,7 +13,7 @@ private:
 	void readFile(int);
 public:
 	MonsterData();
-	void loadData();
-	void showData() const;
-	Monster getRandomMonster();
+	void loadData() override;
+	void showData() const override;
+	vector<Monster> &getMonster();
 };

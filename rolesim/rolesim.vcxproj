@@ -140,6 +140,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gamedata.cpp" />
+    <ClCompile Include="menumanager.cpp" />
     <ClCompile Include="monster.cpp" />
     <ClCompile Include="monsterdata.cpp" />
     <ClCompile Include="npc.cpp" />
@@ -147,20 +149,21 @@
     <ClCompile Include="itemdata.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="npcdata.cpp" />
-    <ClCompile Include="playdata.cpp" />
+    <ClCompile Include="datamanager.cpp" />
     <ClCompile Include="user.cpp" />
     <ClCompile Include="userdata.cpp" />
     <ClCompile Include="skilldata.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gamedata.h" />
+    <ClInclude Include="menumanager.h" />
     <ClInclude Include="monster.h" />
     <ClInclude Include="monsterdata.h" />
     <ClInclude Include="npc.h" />
     <ClInclude Include="stagemanager.h" />
     <ClInclude Include="itemdata.h" />
     <ClInclude Include="npcdata.h" />
-    <ClInclude Include="playdata.h" />
+    <ClInclude Include="datamanager.h" />
     <ClInclude Include="user.h" />
     <ClInclude Include="userdata.h" />
     <ClInclude Include="skilldata.h" />

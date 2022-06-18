@@ -46,6 +46,8 @@ void User::showItem(const ItemData& item_data) const
 		cout << new_item[2] << endl;
 	}
 	cout << "---------------------------------------------" << endl;
+	cout << "\t[Gold] " << money_ << endl;
+	cout << "---------------------------------------------" << endl;
 }
 
 void User::showSkill(const SkillData& skill_data) const
@@ -179,6 +181,8 @@ void User::levelUp()
 	cout << "[Info] Health " << health_ << " / Mana " << mana_;
 	health_ += level_ * 10;
 	mana_ += level_ * 5;
+	current_health_ = health_;
+	current_mana_ = mana_;
 	cout << " -> Health " << health_ << " / Mana " << mana_ << endl;
 }
 

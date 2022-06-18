@@ -12,7 +12,7 @@ private:
 	void readFile(int);
 public:
 	NpcData();
-	void loadData();
-	void showData() const;
-	Npc getRandomNpc();
+	void loadData() override;
+	void showData() const override;
+	vector<Npc> &getNpc();
 };

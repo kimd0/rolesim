@@ -12,8 +12,8 @@ private:
 	void readFile(const string&);
 public:
 	SkillData();
-	void loadData();
-	void showData() const;
+	void loadData() override;
+	void showData() const override;
 	string getName(int) const;
 	vector<int> getData(int) const;
 };

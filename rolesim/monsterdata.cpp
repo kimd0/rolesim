@@ -64,11 +64,7 @@ void MonsterData::showData() const
 		cout << "[" << i << "] " << monsters_[i].getName() << " | level : " << monsters_[i].getLevel() << " | health : " << monsters_[i].getHealth() << endl << "appearence : " << endl << monsters_[i].getAppearence() << endl;
 }
 
-Monster MonsterData::getRandomMonster()
+vector<Monster> &MonsterData::getMonster()
 {
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> dist(0, monsters_.size() - 1);
-
-	return monsters_[dist(gen)];
+	return monsters_;
 }

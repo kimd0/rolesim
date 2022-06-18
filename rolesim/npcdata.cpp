@@ -66,11 +66,7 @@ void NpcData::showData() const
 		cout << "[" << i << "] " << npcs_[i].getName() << " | level : " << npcs_[i].getScript() << endl;
 }
 
-Npc NpcData::getRandomNpc()
+vector<Npc>&NpcData::getNpc()
 {
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> dist(0, npcs_.size() - 1);
-
-	return npcs_[dist(gen)];
+	return npcs_;
 }

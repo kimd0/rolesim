@@ -1,5 +1,6 @@
 ﻿#include <iostream>
-#include "playdata.h"
+#include "datamanager.h"
+#include "menumanager.h"
 #include "stagemanager.h"
 
 using namespace std;
@@ -7,57 +8,47 @@ using namespace std;
 int main()
 {
     int input;
-    PlayData *play_data = new PlayData();
-    StageManager *stage_manager = new StageManager(*play_data);
-    cout << R"(
-	    ____        __        ____  __            _                ______                   
-	   / __ `____  / /__     / __ `/ /___ ___  __(_)___  ____ _   / ____/___ _____ ___  ___ 
-	  / /_/ / __ `/ / _ `   / /_/ / / __ `/ / / / / __ `/ __ `/  / / __/ __ `/ __ `__  ` _ `
-	 / _, _/ /_/ / /  __/  / ____/ / /_/ / /_/ / / / / / /_/ /  / /_/ / /_/ / / / / / /  __/
-	/_/ |_|`____/_/`___/  /_/   /_/`__,_/`__, /_/_/ /_/`__, /   `____/`__,_/_/ /_/ /_/`___/ 
-	                                    /____/        /____/                                
-	)" << endl;
-    cout << "\t\t\t1) New Game\t\t 2) Load Game" << endl;
+    DataManager *data_manager = new DataManager();
+    StageManager *stage_manager = new StageManager(*data_manager);
+    MenuManager *menu_manager = new MenuManager();
+
     while (true)
     {
-        cout << "Input: ";
-        cin >> input;
-        
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(256, '\n');
-            cout << "[Info] Please enter valid input." << endl;
-            continue;
-        }
-        
+        menu_manager->showMenu();
+        input = menu_manager->getInput();
+
         if (input == 1)
         {
-            play_data->newGame();
-            break;
+            data_manager->newGame();
         }
         else if (input == 2)
         {
-            play_data->loadGame();
-            break;
+            data_manager->loadGame();
         }
-        else
+        else if (input == 3)
         {
-            cout << "[Info] Please enter valid input." << endl;
+            data_manager->showData();
+            continue;
         }
-    }
-    play_data->showInfo();
-
-    //actual game play (combat)
-    cout << "[Info] You have entered the dungeon." << endl;
-    while (true)
-    {
-        if (!stage_manager->newStage())
+        else if (input == 4)
+        {
+            cout << "Thanks for playing!" << endl;
             break;
-    }
+        }
 
-    cout << "[Info] Your adventure is over." << endl;
-    play_data->saveGame();
+        data_manager->showInfo();
+
+        //actual game play (combat)
+        cout << "[Info] You have entered the dungeon." << endl;
+        while (true)
+        {
+            if (!stage_manager->newStage())
+                break;
+        }
+
+        cout << "[Info] Your adventure is over." << endl;
+        data_manager->saveGame();
+    }
 
     return 0;
 }

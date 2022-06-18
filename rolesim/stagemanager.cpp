@@ -1,16 +1,8 @@
 #include "stagemanager.h"
 
-StageManager::StageManager(PlayData& play_data)
+StageManager::StageManager(DataManager& play_data)
 {
 	play_data_ = &play_data;
-	npc_data_ = new NpcData();
-	monster_data_ = new MonsterData();
-}
-
-StageManager::~StageManager()
-{
-	delete npc_data_;
-	delete monster_data_;
 }
 
 bool StageManager::newStage()
@@ -95,7 +87,7 @@ bool StageManager::monsterStage()
 {
 	int input;
 	int max_health;
-	Monster new_monster = monster_data_->getRandomMonster();
+	Monster new_monster = play_data_->getRandomMonster();
 	new_monster.setDifficulty(play_data_->getLevelInfo());
 	max_health = new_monster.getHealth();
 
@@ -218,7 +210,7 @@ bool StageManager::monsterStage()
 
 void StageManager::npcStage()
 {
-	Npc new_npc = npc_data_->getRandomNpc();
+	Npc new_npc = play_data_->getRandomNpc();
 	vector<int> npc_reward = new_npc.getReward();
 
 	//npc encounter

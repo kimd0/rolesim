@@ -54,7 +54,7 @@ void ItemData::loadData()
 
 void ItemData::showData() const
 {
-	cout << "Loaded item data" << endl;
+	cout << "Total " << item_.size() << " items loaded." << endl;
 	for (vector<int>::size_type i = 0; i < item_.size(); i++)
 		cout << "[" << item_[i][0] << "] " << item_name_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
 }

@@ -47,10 +47,13 @@ vector<int> Monster::getReward()
 
 int Monster::actionAtk()
 {
-	return -level_*10;
+	cout << "Monster's damage : " << level_ * 10 << endl;
+	return -level_ * 10;
 }
 
 void Monster::actionDef(int value)
 {
+	cout << "Monster's health : " << health_ << " -> ";
 	health_ -= value;
+	cout << health_ << endl;
 }

@@ -1,27 +1,32 @@
 #pragma once
 
+#include "monsterdata.h"
+#include "npcdata.h"
 #include "userdata.h"
 #include "itemdata.h"
 #include "skilldata.h"
 
-class PlayData
+class DataManager
 {
 private:
 	UserData *user_data_;
 	ItemData *item_data_;
 	SkillData *skill_data_;
+	NpcData* npc_data_;
+	MonsterData* monster_data_;
 	User user_;
 public:
-	PlayData();
-	~PlayData();
+	DataManager();
+	~DataManager();
 	void loadData();
 	void newGame();
 	void loadGame();
 	void saveGame();
-	void showInfo();
-	void showInventory();
-	void showSkill();
-	void showCondition();
+	void showData() const;
+	void showInfo() const;
+	void showInventory() const;
+	void showSkill() const;
+	void showCondition() const;
 	void gainItem(int);
 	void gainSkill(int);
 	void gainMoney(int);
@@ -30,7 +35,9 @@ public:
 	int changeMana(int);
 	int useItem(int);
 	int useSkill(int);
-	string getItemInfo(int);
-	string getSkillInfo(int);
-	int getLevelInfo();
+	string getItemInfo(int) const;
+	string getSkillInfo(int) const;
+	int getLevelInfo() const;
+	Monster getRandomMonster() const;
+	Npc getRandomNpc() const;
 };

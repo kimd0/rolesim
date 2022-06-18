@@ -9,6 +9,8 @@
 class User
 {
 private:
+	typedef vector<int> skill_list_t;
+	typedef vector<int> item_list_t;
 	string name_;
 	int level_;
 	int experience_;
@@ -17,11 +19,11 @@ private:
 	int mana_;
 	int current_mana_;
 	int money_;
-	vector<int> skill_;
-	vector<int> item_;
+	skill_list_t skill_;
+	item_list_t item_;
 public:
 	User();
-	User(string, int, int, int, int, int, vector<int>, vector<int>);
+	User(string, int, int, int, int, int, skill_list_t, item_list_t);
 	void showCondition() const;
 	void showItem(const ItemData&) const;
 	void showSkill(const SkillData&) const;
@@ -41,6 +43,6 @@ public:
 	int getHealth() const;
 	int getMana() const;
 	int getMoney() const;
-	vector<int> getSkill() const;
-	vector<int> getItem() const;
+	skill_list_t getSkill() const;
+	item_list_t getItem() const;
 };

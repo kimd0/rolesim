@@ -7,7 +7,8 @@ using namespace std;
 class ItemData : public GameData
 {
 private:
-	vector<vector<int>> item_;
+	typedef vector<int> item_info_t;
+	vector<item_info_t> item_;
 	vector<string> item_name_;
 	void readFile(const string&);
 public:
@@ -15,5 +16,5 @@ public:
 	void loadData() override;
 	void showData() const override;
 	string getName(int) const;
-	vector<int> getData(int) const;
+	item_info_t getData(int) const;
 };

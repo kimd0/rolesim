@@ -59,12 +59,18 @@ void MonsterData::loadData()
 
 void MonsterData::showData() const
 {
+	cout << "------------------------------------------" << endl;
 	cout << "Total " << monsters_.size() << " monsters loaded." << endl;
+	cout << "------------------------------------------" << endl;
 	for (vector<int>::size_type i = 0; i < monsters_.size(); i++)
-		cout << "[" << i << "] " << monsters_[i].getName() << " | level : " << monsters_[i].getLevel() << " | health : " << monsters_[i].getHealth() << endl << "appearence : " << endl << monsters_[i].getAppearence() << endl;
+	{
+		cout << "[" << i << "] " << monsters_[i].getName() << " | level : " << monsters_[i].getLevel() << " | health : " << monsters_[i].getHealth() << endl;
+		cout << "appearence : " << endl << monsters_[i].getAppearence() << endl;
+		cout << "------------------------------------------" << endl;
+	}
 }
 
-vector<Monster> &MonsterData::getMonster()
+MonsterData::monster_list_t &MonsterData::getMonster()
 {
 	return monsters_;
 }

@@ -7,7 +7,8 @@ using namespace std;
 class SkillData : public GameData
 {
 private:
-	vector<vector<int>> skill_;
+	typedef vector<int> skill_info_t;
+	vector<skill_info_t> skill_;
 	vector<string> skill_name_;
 	void readFile(const string&);
 public:
@@ -15,7 +16,7 @@ public:
 	void loadData() override;
 	void showData() const override;
 	string getName(int) const;
-	vector<int> getData(int) const;
+	skill_info_t getData(int) const;
 };
 
 

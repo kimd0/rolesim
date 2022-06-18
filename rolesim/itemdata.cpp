@@ -15,20 +15,20 @@ void ItemData::readFile(const string& file_name)
 		string read_line;
 		while(getline(read_file, read_line))
 		{
-			stringstream sstream(read_line);
-			vector<int> new_item;
+			stringstream string_stream(read_line);
+			item_info_t new_item;
 			//item.txt: code/name/type/value
 			//code
-			getline(sstream, read_line, '/');
+			getline(string_stream, read_line, '/');
 			new_item.push_back(stoi(read_line));
 			//name
-			getline(sstream, read_line, '/');
+			getline(string_stream, read_line, '/');
 			item_name_.push_back(read_line);
 			//type
-			getline(sstream, read_line, '/');
+			getline(string_stream, read_line, '/');
 			new_item.push_back(stoi(read_line));
 			//value
-			getline(sstream, read_line, '/');
+			getline(string_stream, read_line, '/');
 			new_item.push_back(stoi(read_line));
 
 			item_.push_back(new_item);
@@ -54,7 +54,9 @@ void ItemData::loadData()
 
 void ItemData::showData() const
 {
+	cout << "------------------------------------------" << endl;
 	cout << "Total " << item_.size() << " items loaded." << endl;
+	cout << "------------------------------------------" << endl;
 	for (vector<int>::size_type i = 0; i < item_.size(); i++)
 		cout << "[" << item_[i][0] << "] " << item_name_[i] << " | type : " << item_[i][1] << " | value : " << item_[i][2] << endl;
 }
@@ -64,7 +66,7 @@ string ItemData::getName(int code) const
 	return item_name_[code];
 }
 
-vector<int> ItemData::getData(int code) const
+ItemData::item_info_t ItemData::getData(int code) const
 {
 	// return [code, type, value]
 	// type 0 : health, 1: mana, 2: attack

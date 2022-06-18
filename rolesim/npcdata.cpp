@@ -61,12 +61,25 @@ void NpcData::loadData()
 
 void NpcData::showData() const
 {
+	cout << "------------------------------------------" << endl;
 	cout << "Total " << npcs_.size() << " npcs loaded." << endl;
+	cout << "------------------------------------------" << endl;
 	for (vector<int>::size_type i = 0; i < npcs_.size(); i++)
-		cout << "[" << i << "] " << npcs_[i].getName() << " | level : " << npcs_[i].getScript() << endl;
+	{
+		cout << "[" << i << "] " << npcs_[i].getName() << " | items : ";
+		for (vector<int>::size_type j = 0; j < npcs_[i].getItem().size(); j++)
+			cout << npcs_[i].getItem()[j] << " ";
+		cout << " | skills : ";
+		for (vector<int>::size_type j = 0; j < npcs_[i].getSkill().size(); j++)
+			cout << npcs_[i].getSkill()[j] << " ";
+		cout << "\nscripts : ";
+		for (vector<int>::size_type j = 0; j < npcs_[i].getScript().size(); j++)
+			cout << npcs_[i].getScript()[j] << endl;
+		cout << "------------------------------------------" << endl;
+	}
 }
 
-vector<Npc>&NpcData::getNpc()
+NpcData::npc_list_t &NpcData::getNpc()
 {
 	return npcs_;
 }

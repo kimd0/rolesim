@@ -8,12 +8,13 @@ using namespace std;
 class MonsterData : public GameData
 {
 private:
-	vector<Monster> monsters_;
+	typedef vector<Monster> monster_list_t;
+	monster_list_t monsters_;
 	string appearence;
 	void readFile(int);
 public:
 	MonsterData();
 	void loadData() override;
 	void showData() const override;
-	vector<Monster> &getMonster();
+	monster_list_t &getMonster();
 };

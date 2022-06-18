@@ -245,12 +245,12 @@ int User::getMoney() const
 	return money_;
 }
 
-vector<int> User::getSkill() const
+User::skill_list_t User::getSkill() const
 {
 	return skill_;
 }
 
-vector<int> User::getItem() const
+User::item_list_t User::getItem() const
 {
 	return item_;
 }

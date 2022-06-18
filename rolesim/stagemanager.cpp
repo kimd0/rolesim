@@ -32,7 +32,7 @@ bool StageManager::newStage()
 		{
 			system("cls");
 
-			if (computeProb(70)) //for test. should be 70%
+			if (randomNumber() < 70) //for test. should be 70%
 			{
 				if (monsterStage())
 					break;
@@ -120,7 +120,7 @@ bool StageManager::monsterStage()
 		}
 		else if (input == 2)
 		{
-			if (computeProb(50))
+			if (randomNumber() < 50)
 			{
 				cout << "[Info] Successfully escaped from the monster." << endl;
 				return true;
@@ -211,37 +211,37 @@ bool StageManager::monsterStage()
 void StageManager::npcStage()
 {
 	Npc new_npc = play_data_->getRandomNpc();
-	vector<int> npc_reward = new_npc.getReward();
+	int reward;
 
 	//npc encounter
 	cout << "---------------------------------------------" << endl;
 	cout << "[Info] A voice comes from somewhere..." << endl;
-	cout << "[Info] " << new_npc.getName() << " : " << new_npc.getScript() << endl;
+	cout << "[Info] " << new_npc.getName() << " : ";
+	cout << new_npc.getScript()[randomNumber() % (int)new_npc.getScript().size()] << endl;
 
-	if (npc_reward[0] == 0)
+	if (randomNumber() < 80)
 	{
+		reward = new_npc.getItem()[randomNumber() % (int)new_npc.getItem().size()];
 		cout << "[Info] " << new_npc.getName() << " gave you the item, ["
-			<< play_data_->getItemInfo(npc_reward[1]) << "] and disappeared." << endl;
-		play_data_->gainItem(npc_reward[1]);
+			<< play_data_->getItemInfo(reward) << "] and disappeared." << endl;
+		play_data_->gainItem(reward);
 	}
 	else
 	{
+		reward = new_npc.getSkill()[randomNumber() % (int)new_npc.getSkill().size()];
 		cout << "[Info] " << new_npc.getName() << " teached you the skill, ["
-			<< play_data_->getSkillInfo(npc_reward[1]) << "] and disappeared." << endl;
-		play_data_->gainSkill(npc_reward[1]);
+			<< play_data_->getSkillInfo(reward) << "] and disappeared." << endl;
+		play_data_->gainSkill(reward);
 	}
 	cout << "---------------------------------------------" << endl;
 }
 
 
-bool StageManager::computeProb(int percent)
+int StageManager::randomNumber(int min, int max)
 {
 	random_device rd;
 	mt19937 gen(rd());
-	uniform_int_distribution<int> dist(0, 99);
+	uniform_int_distribution<int> dist(min, max);
 
-	if (dist(gen) < percent)
-		return true;
-	else
-		return false;
+	return dist(gen);
 }

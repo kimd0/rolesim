@@ -45,7 +45,7 @@ vector<int> Monster::getReward()
 	return rewards;
 }
 
-int Monster::actionAtk()
+int Monster::actionAtk() const
 {
 	cout << "Monster's damage : " << level_ * 10 << endl;
 	return -level_ * 10;

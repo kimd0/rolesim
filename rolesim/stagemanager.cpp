@@ -147,11 +147,10 @@ bool StageManager::monsterStage()
 	{
 		cout << "---------------------------------------------" << endl;
 		cout << new_monster.getAppearence() << endl;
-		cout << "[ Lvl. " << new_monster.getLevel() << " ] " << new_monster.getName() << endl;
+		cout << "[ LV. " << new_monster.getLevel() << " ] " << new_monster.getName() << endl;
 		cout << "Health : " << new_monster.getHealth() << " / " << max_health << endl;
 		cout << "---------------------------------------------" << endl;
-		cout << "---------------------------------------------" << endl;
-		cout << "[Player]" << endl;
+		cout << "VS" << endl;
 		play_data_->showCondition();
 		cout << "---------------------------------------------" << endl;
 		cout << "1) Use Skill\t2) Use Item" << endl;

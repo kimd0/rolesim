@@ -109,7 +109,7 @@ string UserData::selectData()
 
 	while (true)
 	{
-		cout << "Input user name :";
+		cout << "Input user name : ";
 		cin >> user_name;
 
 		if (cin.fail())

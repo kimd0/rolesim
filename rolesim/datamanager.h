@@ -1,5 +1,7 @@
 #pragma once
 
+#include <random>
+
 #include "monsterdata.h"
 #include "npcdata.h"
 #include "userdata.h"
@@ -38,6 +40,6 @@ public:
 	string getItemInfo(int) const;
 	string getSkillInfo(int) const;
 	int getLevelInfo() const;
-	Monster getRandomMonster() const;
-	Npc getRandomNpc() const;
+	vector<Monster> getMonsterList() const;
+	vector<Npc> getNpcList() const;
 };

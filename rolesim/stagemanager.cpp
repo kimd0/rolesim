@@ -87,7 +87,7 @@ bool StageManager::monsterStage()
 {
 	int input;
 	int max_health;
-	Monster new_monster = play_data_->getRandomMonster();
+	Monster new_monster = play_data_->getMonsterList()[randomNumber() % (int)play_data_->getMonsterList().size()];
 	new_monster.setDifficulty(play_data_->getLevelInfo());
 	max_health = new_monster.getHealth();
 
@@ -181,7 +181,7 @@ bool StageManager::monsterStage()
 		}
 		else
 		{
-			cout << "[Info] The turn is passed due to the wrong choice.";
+			cout << "[Info] The turn is passed due to the wrong choice." << endl << endl;
 		}
 
 		if (new_monster.getHealth() <= 0)
@@ -209,7 +209,7 @@ bool StageManager::monsterStage()
 
 void StageManager::npcStage()
 {
-	Npc new_npc = play_data_->getRandomNpc();
+	Npc new_npc = play_data_->getNpcList()[randomNumber() % (int)play_data_->getNpcList().size()];
 	int reward;
 
 	//npc encounter

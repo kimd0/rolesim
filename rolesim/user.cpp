@@ -46,7 +46,7 @@ void User::showItem(const ItemData& item_data) const
 		cout << new_item[2] << endl;
 	}
 	cout << "---------------------------------------------" << endl;
-	cout << "\t[Gold] " << money_ << endl;
+	cout << "[Gold] " << money_ << endl;
 	cout << "---------------------------------------------" << endl;
 }
 

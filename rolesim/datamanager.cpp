@@ -122,22 +122,12 @@ int DataManager::getLevelInfo() const
 	return user_.getLevel();
 }
 
-Monster DataManager::getRandomMonster() const
+vector<Monster> DataManager::getMonsterList() const
 {
-	vector<Monster> monsters = monster_data_->getMonster();
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> dist(0, monsters.size() - 1);
-
-	return monsters[dist(gen)];
+	return monster_data_->getMonster();
 }
 
-Npc DataManager::getRandomNpc() const
+vector<Npc> DataManager::getNpcList() const
 {
-	vector<Npc> npcs = npc_data_->getNpc();
-	random_device rd;
-	mt19937 gen(rd());
-	uniform_int_distribution<> dist(0, npcs.size() - 1);
-
-	return npcs[dist(gen)];
+	return npc_data_->getNpc();
 }
